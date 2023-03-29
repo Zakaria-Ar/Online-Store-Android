@@ -1,0 +1,28 @@
+<resources>
+    <string name="app_name">Store</string>
+    <string name="mail">E-mail</string>
+    <string name="pass">Password</string>
+    <string name="enter_mail">Please enter your mail</string>
+    <string name="enter_pass">Please enter your password</string>
+    <string name="login">Login</string>
+    <string name="full_name">Full Name</string>
+    <string name="mobile_number">Mobile Number</string>
+    <string name="email_address">Email Address</string>
+    <string name="password">Password</string>
+    <string name="repassword">Re-Enter Password</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="log_in">Login</string>
+    <string name="reset_password"><u>Forgot Password?</u></string>
+    <string name="todo">Logo</string>
+    <string name="hello">Hello</string>
+    <string name="UserName">Anouar</string>
+    <string name="search_elements">Search elements</string>
+    <string name="_100_mad">100 MAD</string>
+    <string name="_150_mad">150 MAD</string>
+    <string name="trending">TRENDING</string>
+    <string name="dummy_text">hello my name is anouar oumaacha i am from errachidia but i am studying right now at ENSIAS </string>
+    <string name="home">Home</string>
+    <string name="settings">Settings</string>
+    <string name="account">Account</string>
+    <string name="favorite">favorite</string>
+</resources>
