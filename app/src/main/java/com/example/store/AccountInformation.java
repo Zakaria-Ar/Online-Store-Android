@@ -46,7 +46,8 @@ public class AccountInformation extends AppCompatActivity {
         firebaseFirestore = FirebaseFirestore.getInstance();
         userID = user.getUid();
 
-        final TextView fullNameTextView = (TextView) findViewById(R.id.fullName);
+        final TextView firstNameTextView = (TextView) findViewById(R.id.firstName);
+        final TextView lastNameTextView = (TextView) findViewById(R.id.lastName);
         final TextView emailTextView = (TextView) findViewById(R.id.emailAddress);
         final TextView mobileNumberTextView = (TextView) findViewById(R.id.mobileNumber);
 
@@ -55,11 +56,13 @@ public class AccountInformation extends AppCompatActivity {
                     public void onSuccess(DocumentSnapshot documentSnapshot) {
                         if (documentSnapshot.exists()) {
                             // User document exists, get data
-                            String fullName = documentSnapshot.getString("name");
+                            String firstName = documentSnapshot.getString("firstName");
+                            String lastName = documentSnapshot.getString("lastName");
                             String email = documentSnapshot.getString("email");
                             String mobileNumber = documentSnapshot.getString("number");
 
-                            fullNameTextView.setText(fullName);
+                            firstNameTextView.setText(firstName);
+                            lastNameTextView.setText(lastName);
                             emailTextView.setText(email);
                             mobileNumberTextView.setText(mobileNumber);
 
