@@ -73,5 +73,10 @@
         android:text="@string/sign_up"
         android:textColor="@color/first_color"
         android:textSize="20sp"/>
+    <ProgressBar
+        android:id="@+id/progressbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"/>
 
 </LinearLayout>
