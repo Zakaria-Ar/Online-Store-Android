@@ -42,7 +42,7 @@ public class Home extends AppCompatActivity {
                     public void onSuccess(DocumentSnapshot documentSnapshot) {
                         if (documentSnapshot.exists()) {
                             // User document exists, get data
-                            String fullName = documentSnapshot.getString("name");
+                            String fullName = documentSnapshot.getString("lastName");
                             userName.setText(fullName);
 
                         }

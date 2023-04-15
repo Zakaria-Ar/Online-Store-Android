@@ -27,13 +27,26 @@
                 app:srcCompat="@drawable/img" />
 
             <EditText
-                android:id="@+id/name"
+                android:id="@+id/firstName"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
                 android:autofillHints="nothing"
                 android:background="@drawable/round_btn"
                 android:backgroundTint="@color/first_color"
-                android:hint="@string/full_name"
+                android:hint="@string/firstName"
+                android:inputType="textPersonName"
+                android:padding="15dp"
+                android:textColorHint="#FDCA7E"
+                tools:ignore="TextContrastCheck" />
+            <EditText
+                android:id="@+id/lastName"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_marginTop="15dp"
+                android:autofillHints="nothing"
+                android:background="@drawable/round_btn"
+                android:backgroundTint="@color/first_color"
+                android:hint="@string/lastName"
                 android:inputType="textPersonName"
                 android:padding="15dp"
                 android:textColorHint="#FDCA7E"
@@ -109,6 +122,7 @@
                 android:textColorHint="#FFFFFF"
                 tools:ignore="TextContrastCheck" />
 
+
             <TextView
                 android:id="@+id/goToLoginActivity"
                 android:layout_width="wrap_content"
@@ -119,6 +133,11 @@
                 android:textColor="@color/first_color"
                 tools:ignore="TextContrastCheck"
                 android:textSize="20sp"/>
+            <ProgressBar
+                android:id="@+id/progressbar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone"/>
         </LinearLayout>
     </ScrollView>
 
