@@ -55,7 +55,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 userLogin();
                 break;
             case R.id.resetPassword:
-                startActivity(new Intent(this,ForgotPassword.class));
+                startActivity(new Intent(this, ForgotPasswordActivity.class));
                 break;
         }
     }
@@ -90,7 +90,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
                     if(user.isEmailVerified()) {
                         //redirect to user profile
-                        startActivity(new Intent(LoginActivity.this, Home.class));
+                        startActivity(new Intent(LoginActivity.this, HomeActivity.class));
                         progressBar.setVisibility(View.INVISIBLE);
                     }else{
                         user.sendEmailVerification();

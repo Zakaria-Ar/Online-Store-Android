@@ -17,7 +17,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
-public class AccountInformation extends AppCompatActivity {
+public class AccountInformationActivity extends AppCompatActivity {
 
     private FirebaseUser user;
     FirebaseFirestore firebaseFirestore;
@@ -34,7 +34,7 @@ public class AccountInformation extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 FirebaseAuth.getInstance().signOut();
-                startActivity(new Intent(AccountInformation.this, LoginActivity.class));
+                startActivity(new Intent(AccountInformationActivity.this, LoginActivity.class));
             }
         });
 
@@ -68,7 +68,7 @@ public class AccountInformation extends AppCompatActivity {
                 .addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(AccountInformation.this, "Something Wrong happened !", Toast.LENGTH_LONG).show();
+                        Toast.makeText(AccountInformationActivity.this, "Something Wrong happened !", Toast.LENGTH_LONG).show();
                     }
                 });
     }

@@ -15,7 +15,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
-public class Home extends AppCompatActivity {
+public class HomeActivity extends AppCompatActivity {
     private View account;
     private FirebaseUser user;
     FirebaseFirestore firebaseFirestore;
@@ -29,14 +29,14 @@ public class Home extends AppCompatActivity {
         account.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(Home.this,AccountInformation.class));
+                startActivity(new Intent(HomeActivity.this, AccountInformationActivity.class));
             }
         });
         account = (View) findViewById(R.id.menuFavorite);
         account.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(Home.this,ShoppingBasketActivity.class));
+                startActivity(new Intent(HomeActivity.this,ShoppingBasketActivity.class));
             }
         });
         user = FirebaseAuth.getInstance().getCurrentUser();
