@@ -1,0 +1,142 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_form"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    android:background="@color/white"
+    tools:context=".StoreFormActivity">
+
+    <TextView
+        android:id="@+id/fill_out_form_textview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Fill out the form"
+        android:layout_marginTop="60dp"
+        android:fontFamily="@font/imprim"
+        android:layout_marginLeft="75dp"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        android:textColor="@color/black" />
+
+    <TextView
+        android:id="@+id/product_type_textview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:layout_below="@id/fill_out_form_textview"
+        android:layout_marginTop="80dp"
+        android:fontFamily="@font/imprim"
+        android:text="Product Type:"
+        android:textSize="20sp"
+        android:textColor="@color/black" />
+
+    <Spinner
+        android:id="@+id/product_type_spinner"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:fontFamily="@font/imprim"
+        android:layout_below="@id/product_type_textview"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/bg_spinner"
+        android:textColor="@color/material_dynamic_primary0" />
+
+    <TextView
+        android:id="@+id/product_name_textview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/imprim"
+        android:layout_below="@id/product_type_spinner"
+        android:layout_marginTop="25dp"
+        android:layout_marginLeft="15dp"
+
+        android:text="Product Name:"
+        android:textSize="20sp"
+        android:textColor="@color/black" />
+
+    <EditText
+        android:id="@+id/product_name_edittext"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:fontFamily="@font/imprim"
+        android:layout_below="@id/product_name_textview"
+        android:layout_marginTop="8dp"
+        android:inputType="text"
+        android:hint="Enter product name"
+        android:gravity="center"
+        android:textColorHint="@color/white"
+        android:textColor="@color/white"
+        android:background="@drawable/bg_edittext" />
+
+    <TextView
+        android:id="@+id/product_description_textview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/product_name_edittext"
+        android:layout_marginTop="25dp"
+        android:fontFamily="@font/imprim"
+        android:text="Product Description:"
+        android:layout_marginLeft="15dp"
+
+        android:textSize="20sp"
+        android:textColor="@color/black" />
+
+    <EditText
+        android:id="@+id/product_description_edittext"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:fontFamily="@font/imprim"
+        android:layout_below="@id/product_description_textview"
+        android:layout_marginTop="8dp"
+        android:inputType="text"
+        android:gravity="center"
+        android:hint="Enter product description"
+        android:textColorHint="@color/white"
+        android:textColor="@color/white"
+        android:background="@drawable/bg_edittext" />
+
+    <TextView
+        android:id="@+id/product_price_textview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/product_description_edittext"
+        android:layout_marginTop="25dp"
+        android:text="Product Price:"
+        android:layout_marginLeft="15dp"
+
+        android:textSize="20sp"
+        android:fontFamily="@font/imprim"
+        android:textColorHint="@color/white"
+        android:textColor="@color/black" />
+
+    <EditText
+        android:id="@+id/product_price_edittext"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_below="@id/product_price_textview"
+        android:layout_marginTop="8dp"
+        android:inputType="numberDecimal"
+        android:gravity="center"
+        android:fontFamily="@font/imprim"
+        android:hint="Enter product price"
+        android:textColorHint="@color/white"
+        android:textColor="@color/white"
+
+        android:background="@drawable/bg_edittext" />
+
+    <Button
+        android:id="@+id/submit_button"
+        android:layout_width="130sp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/product_price_edittext"
+        android:layout_marginTop="60dp"
+        android:text="Submit"
+        android:fontFamily="@font/imprim"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:layout_marginLeft="120dp"
+        android:textColor="@color/white"
+        android:background="@drawable/mybutton"
+        android:backgroundTint="@color/app"/>
+
+</RelativeLayout>

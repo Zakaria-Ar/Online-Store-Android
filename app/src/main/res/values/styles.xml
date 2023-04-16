@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="CustomFontStyle">
+        <item name="android:fontFamily">@font/imprim</item>
+    </style>
+    <string-array name="type">
+        <item>Eléctroménager</item>
+        <item>Vetements</item>
+        <item>Accessoires</item>
+    </string-array>
+</resources>

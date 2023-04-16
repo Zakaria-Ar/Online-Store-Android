@@ -1,0 +1,57 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <string name="app_name">ProjetMobile_Cart</string>
+    <string name="cart">Cart</string>
+    <string name="order" font-family="Imprima"><b>My Orders</b></string>
+    <string name="produit"><b>Produit 1</b></string>
+    <string name="desc">Description</string>
+    <string name="Prix" font-family="Imprima"> <b>PRIX Dhs</b></string>
+    <string name="total">Total items</string>
+    <string name="prix_total" tools:ignore="DuplicateDefinition">25dhs</string>
+    <string name="delievery">Standard Delievery</string>
+    <string name="prixdel">50dhs</string>
+    <string name="totaltout">Total items</string>
+    <string name="prixtotaltout">125dhs</string>
+    <string name="buttontext">Checkout Now</string>
+    <string name="creerstore">Create your store</string>
+    <string name="vente">Fill out this form</string>
+    <string name="productname">Product name</string>
+    <string name="producttype">Product type</string>
+    <string name="productdesc">Product description</string>
+    <string name="productprice">Product price</string>
+    <string name="quantity"> x1 </string>
+    <string name="profilestore">Add your Store Logo</string>
+    <string name="storename">Store Name:</string>
+    <string name="productName">Product</string>
+    <string name="productDesc">Description description description description description description description description description</string>
+    <string name="addToCart">Add To Cart</string>
+    <string name="phonesCat">Phones and tablets</string>
+    <string name="search">Search</string>
+    <string name="home">Home</string>
+    <string name="mail">E-mail</string>
+    <string name="pass">Password</string>
+    <string name="enter_mail">Please enter your mail</string>
+    <string name="enter_pass">Please enter your password</string>
+    <string name="login">Login</string>
+    <string name="firstName">First Name</string>
+    <string name="lastName">Last Name</string>
+    <string name="mobile_number">Mobile Number</string>
+    <string name="email_address">Email Address</string>
+    <string name="password">Password</string>
+    <string name="repassword">Re-Enter Password</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="log_in">Login</string>
+    <string name="reset_password"><u>Forgot Password?</u></string>
+    <string name="todo">Logo</string>
+    <string name="hello">Hello</string>
+    <string name="UserName">Anouar</string>
+    <string name="search_elements">Search elements</string>
+    <string name="_100_mad">100 MAD</string>
+    <string name="_150_mad">150 MAD</string>
+    <string name="trending">TRENDING</string>
+    <string name="dummy_text">hello my name is anouar oumaacha i am from errachidia but i am studying right now at ENSIAS </string>
+    <string name="settings">Settings</string>
+    <string name="account">Account</string>
+    <string name="favorite">favorite</string>
+
+
+</resources>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Bottom layer: Circle -->
+    <item>
+        <shape android:shape="oval">
+                <item android:gravity="center">
+                    <bitmap android:src="@drawable/bag_icon" android:gravity="center" />
+                </item>
+            <solid android:color="#F44336" />
+            <stroke
+                android:width="2dp"
+                android:color="@color/white" />
+
+        </shape>
+    </item>
+    <!-- Top layer: Text -->
+
+</layer-list>
