@@ -52,6 +52,19 @@
     <string name="settings">Settings</string>
     <string name="account">Account</string>
     <string name="favorite">favorite</string>
+    <string name="modify1">modify1</string>
+    <string name="delete1">delete1</string>
+    <string name="delete2">delete2</string>
+    <string name="modify2">modify2</string>
+    <string name="delete3">delete3</string>
+    <string name="modify3">modify3</string>
+    <string name="delete4">delete4</string>
+    <string name="modify4">modify4</string>
+    <string name="delete5">delete5</string>
+    <string name="modify5">modify5</string>
+    <string name="delete6">delete6</string>
+    <string name="modify6">modify6</string>
+    <string name="add">add</string>
 
 
 </resources>
