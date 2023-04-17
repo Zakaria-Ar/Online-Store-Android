@@ -37,13 +37,14 @@
 
                         <TextView
                             android:id="@+id/textView"
-                            android:layout_width="wrap_content"
+                            android:layout_width="0dp"
                             android:layout_height="110dp"
                             android:layout_weight="1"
-                            android:fontFamily="@font/imprim"
+                            android:fontFamily="@font/imprima"
                             android:gravity="center"
                             android:text="@string/cart"
-                            android:textSize="25sp" />
+                            android:textSize="25sp"
+                            tools:ignore="NestedWeights" />
 
                     </LinearLayout>
 
@@ -57,9 +58,9 @@
                             android:id="@+id/textView2"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="30dp"
+                            android:layout_marginStart="30dp"
                             android:layout_marginBottom="50sp"
-                            android:fontFamily="@font/imprim"
+                            android:fontFamily="@font/imprima"
                             android:text="@string/order"
                             android:textColor="@color/black"
                             android:textSize="40sp" />
@@ -89,10 +90,12 @@
                             android:id="@+id/imageView5"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="50dp"
+                            android:layout_marginStart="50dp"
                             android:layout_marginTop="30sp"
                             android:layout_marginBottom="30sp"
-                            app:srcCompat="@drawable/line1" />
+                            app:srcCompat="@drawable/line1"
+                            tools:ignore="ImageContrastCheck"
+                            android:contentDescription="@string/line" />
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -104,7 +107,7 @@
                                 android:id="@+id/total"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_marginLeft="35dp"
+                                android:layout_marginStart="35dp"
                                 android:layout_weight="1"
 
                                 android:text="@string/total"
@@ -114,12 +117,13 @@
                                 android:id="@+id/prix_total"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_marginRight="30dp"
+                                android:layout_marginEnd="30dp"
                                 android:layout_weight="1"
                                 android:gravity="right"
                                 android:text="@string/prix_total"
                                 android:textSize="20sp"
-                                android:textStyle="bold" />
+                                android:textStyle="bold"
+                                tools:ignore="RtlHardcoded" />
                         </LinearLayout>
 
                         <LinearLayout
@@ -132,8 +136,8 @@
                                 android:id="@+id/delivery"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_marginLeft="35dp"
-                                android:layout_marginRight="30dp"
+                                android:layout_marginStart="35dp"
+                                android:layout_marginEnd="30dp"
                                 android:layout_weight="1"
                                 android:text="@string/delievery"
                                 android:textSize="20sp" />
@@ -142,12 +146,13 @@
                                 android:id="@+id/prixdelivery"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_marginRight="30dp"
+                                android:layout_marginEnd="30dp"
                                 android:layout_weight="1"
                                 android:gravity="right"
                                 android:text="@string/prixdel"
                                 android:textSize="20sp"
-                                android:textStyle="bold" />
+                                android:textStyle="bold"
+                                tools:ignore="RtlHardcoded" />
                         </LinearLayout>
 
                         <LinearLayout
@@ -160,7 +165,7 @@
                                 android:id="@+id/totaltout"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_marginLeft="35dp"
+                                android:layout_marginStart="35dp"
                                 android:layout_weight="1"
                                 android:text="@string/totaltout"
                                 android:textSize="20sp" />
@@ -171,25 +176,22 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginRight="30dp"
                                 android:layout_weight="1"
-                                android:fontFamily="@font/imprim"
+                                android:fontFamily="@font/imprima"
                                 android:gravity="right"
                                 android:text="@string/prixtotaltout"
                                 android:textSize="20sp"
-                                android:textStyle="bold" />
+                                android:textStyle="bold"
+                                tools:ignore="RtlHardcoded" />
                         </LinearLayout>
 
                         <Button
                             android:id="@+id/button"
-                            android:layout_width="190dp"
-                            android:layout_height="62dp"
-                            android:layout_gravity="center"
+                            style="@style/MyStyleButton"
+                            android:background="@drawable/round_btn"
                             android:layout_marginTop="30dp"
                             android:layout_marginBottom="10dp"
-                            android:background="@drawable/mybutton"
-                            android:backgroundTint="#FF7A00"
-                            android:fontFamily="@font/imprim"
                             android:text="@string/buttontext"
-                            android:textStyle="bold" />
+                            tools:ignore="TextContrastCheck" />
 
 
                     </LinearLayout>

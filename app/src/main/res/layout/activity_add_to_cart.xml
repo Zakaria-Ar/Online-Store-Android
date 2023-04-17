@@ -24,23 +24,25 @@
                 android:id="@+id/imageView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:srcCompat="@drawable/back" />
+                app:srcCompat="@drawable/back"
+                android:contentDescription="@string/go_back" />
 
             <TextView
                 android:id="@+id/textView"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:textAlignment="center"
                 android:layout_weight="1"
                 android:textSize="18sp"
-                android:fontFamily="@font/imprim"
-                android:text="Details" />
+                android:fontFamily="@font/imprima"
+                android:text="@string/details" />
 
             <ImageView
                 android:id="@+id/imageView2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:srcCompat="@drawable/save" />
+                app:srcCompat="@drawable/save"
+                android:contentDescription="@string/favorites" />
         </LinearLayout>
 
         <androidx.cardview.widget.CardView
@@ -70,7 +72,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/productName"
                 android:textSize="30sp"
-                android:fontFamily="@font/imprim"
+                android:fontFamily="@font/imprima"
                 android:textColor="#0D0D0E" />
         </LinearLayout>
 
@@ -82,7 +84,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/imprim"
+                android:fontFamily="@font/imprima"
                 android:text="@string/productDesc"
                 android:textColor="#0D0D0E"
                 android:textSize="16sp" />
@@ -98,17 +100,17 @@
             <TextView
                 android:id="@+id/productPrice"
                 android:layout_weight="1"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:textColor="@color/textBlack"
                 android:layout_height="wrap_content"
                 android:textSize="36sp"
-                android:text="1000DH" />
+                android:text="@string/_1000dh"
+                tools:ignore="NestedWeights" />
 
             <Button
                 android:id="@+id/addToCartBtn"
-                android:layout_width="162dp"
-                android:layout_height="62dp"
-                android:background="@drawable/rounded_button"
+                style="@style/MyStyleButton"
+                android:background="@drawable/round_btn"
                 android:text="@string/addToCart" />
         </LinearLayout>
     </LinearLayout>

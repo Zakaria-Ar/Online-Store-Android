@@ -1,11 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <style name="CustomFontStyle">
-        <item name="android:fontFamily">@font/imprim</item>
+        <item name="android:fontFamily">@font/imprima</item>
     </style>
     <string-array name="type">
         <item>Eléctroménager</item>
         <item>Vetements</item>
         <item>Accessoires</item>
     </string-array>
+    <style name="MyStyleForm">
+        <item name="android:fontFamily">@font/imprima</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">48dp</item>
+        <item name="android:backgroundTint">@color/first_color</item>
+        <item name="android:padding">15dp</item>
+        <item name="android:textColorHint">@color/formText</item>
+        <item name ="android:background">@drawable/round_btn</item>
+    </style>
+    <style name="MyStyleButton">
+        <item name="android:fontFamily">@font/imprima</item>
+        <item name="color">@color/first_color</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textColorHint">@color/white</item>
+        <item name="android:textStyle">bold</item>
+    </style>
 </resources>

@@ -65,6 +65,34 @@
     <string name="delete6">delete6</string>
     <string name="modify6">modify6</string>
     <string name="add">add</string>
-
+    <string name="logout">Logout</string>
+    <string name="go_back">Go Back</string>
+    <string name="details">Details</string>
+    <string name="favorites">Favorites</string>
+    <string name="_1000dh">1000DH</string>
+    <string name="menu">Menu</string>
+    <string name="product">Product</string>
+    <string name="add_to_cart">Add to cart</string>
+    <string name="add_a_store">Add a store</string>
+    <string name="plus">Plus</string>
+    <string name="online_store">Online Store</string>
+    <string name="enter_your_email">Enter your email</string>
+    <string name="reset_password_text">Reset Psassword</string>
+    <string name="logo">Logo</string>
+    <string name="my_store">My Store</string>
+    <string name="line">Line</string>
+    <string name="fill_out_the_form">Fill out the form</string>
+    <string name="product_type">Product Type:</string>
+    <string name="product_name">Product Name:</string>
+    <string name="enter_product_name">Enter product name</string>
+    <string name="product_description">Product Description:</string>
+    <string name="enter_product_price">Enter product price</string>
+    <string name="submit">Submit</string>
+    <string name="enter_product_description">Enter product description</string>
+    <string name="product_price">Product Price:</string>
+    <string name="avatar">Avatar</string>
+    <string name="enter_store_name">Enter store name</string>
+    <string name="next">Next</string>
+    <string name="delete">Delete</string>
 
 </resources>

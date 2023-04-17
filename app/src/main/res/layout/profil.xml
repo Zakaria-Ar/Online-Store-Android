@@ -155,20 +155,17 @@
 
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
+
     <Button
         android:id="@+id/button"
-        android:layout_width="150dp"
+        android:background="@drawable/round_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="48dp"
         android:layout_marginLeft="380px"
         android:layout_marginTop="200px"
-        android:textColor="@color/black"
-        android:background="#FF7A00"
         android:gravity="center"
-
-
-
-
-        android:layout_height="40dp"
         android:text="Visit my Profile"
+        android:textColor="@color/black"
         android:textSize="40px"
 
         />

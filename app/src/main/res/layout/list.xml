@@ -14,16 +14,18 @@
 
         <ImageView
             android:id="@+id/imageay"
-            android:layout_width="155dp"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_marginLeft="30dp"
+            android:layout_marginStart="30dp"
             android:layout_weight="1"
-            tools:srcCompat="@tools:sample/avatars" />
+            tools:srcCompat="@tools:sample/avatars"
+            android:contentDescription="@string/product" />
 
         <LinearLayout
             android:layout_width="170dp"
             android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            tools:ignore="TextSizeCheck">
 
             <TextView
                 android:id="@+id/textView1ay"
@@ -31,9 +33,10 @@
                 android:layout_height="36dp"
                 android:layout_marginBottom="5dp"
                 android:gravity="center"
-                android:textStyle="bold"
                 android:text="@string/produit"
-                android:textSize="20sp" />
+                android:textSize="20sp"
+                android:textStyle="bold"
+                tools:ignore="TextSizeCheck" />
 
             <TextView
                 android:id="@+id/textView2ay"
@@ -47,8 +50,8 @@
                 android:id="@+id/textView3ay"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/Prix"
                 android:gravity="center"
+                android:text="@string/Prix"
                 android:textSize="20sp"
                 android:textStyle="bold" />
 
@@ -74,30 +77,38 @@
                     android:id="@+id/heartpri"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
                     android:layout_marginTop="63dp"
-                    android:layout_marginLeft="12dp"
-                    android:layout_weight="1"
                     android:clickable="true"
+                    android:contentDescription="@string/product_description"
+                    android:minWidth="48dp"
+                    android:minHeight="48dp"
                     android:onClick="Show()"
-                    app:srcCompat="@drawable/baseline_favorite_border_24" />
+                    app:srcCompat="@drawable/baseline_favorite_border_24"
+                    tools:ignore="OnClick,SpeakableTextPresentCheck,ImageContrastCheck"
+                    android:focusable="true" />
 
                 <ImageView
                     android:id="@+id/heartwhite"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="63dp"
-                    android:layout_marginLeft="12dp"
+                    android:layout_marginStart="12dp"
                     android:visibility="invisible"
                     android:clickable="true"
-                    app:srcCompat="@drawable/baseline_favorite_24" />
+                    app:srcCompat="@drawable/baseline_favorite_24"
+                    android:focusable="true"
+                    android:contentDescription="@string/favorites" />
 
                 <ImageView
                     android:id="@+id/imageView4"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="43dp"
+                    android:layout_marginStart="43dp"
                     android:layout_marginTop="63dp"
-                    app:srcCompat="@drawable/baseline_delete_20" />
+                    app:srcCompat="@drawable/baseline_delete_20"
+                    tools:ignore="ImageContrastCheck"
+                    android:contentDescription="@string/delete" />
             </FrameLayout>
 
             <TextView

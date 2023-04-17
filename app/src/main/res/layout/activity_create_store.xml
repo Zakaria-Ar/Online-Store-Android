@@ -14,14 +14,15 @@
         <TextView
             android:id="@+id/textView3"
             android:layout_width="283dp"
-            android:textColor="@color/black"
-            android:fontFamily="@font/imprim"
+            android:layout_height="64dp"
             android:layout_gravity="center"
             android:layout_marginTop="200dp"
-            android:textStyle="bold"
-            android:layout_height="64dp"
+            android:fontFamily="@font/imprima"
             android:text="@string/creerstore"
-            android:textSize="35sp" />
+            android:textColor="@color/black"
+            android:textSize="35sp"
+            android:textStyle="bold"
+            tools:ignore="TextSizeCheck" />
 
         <FrameLayout
             android:layout_width="match_parent"
@@ -33,22 +34,29 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:clickable="true"
-                app:srcCompat="@drawable/ellipse_19" />
+                app:srcCompat="@drawable/ellipse_19"
+                tools:ignore="SpeakableTextPresentCheck,ImageContrastCheck"
+                android:contentDescription="@string/add_a_store"
+                android:focusable="true" />
 
             <ImageView
                 android:id="@+id/imageView2"
-                android:layout_marginTop="60dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:srcCompat="@drawable/line_5" />
+                android:layout_marginTop="60dp"
+                app:srcCompat="@drawable/line_5"
+                tools:ignore="ImageContrastCheck"
+                android:contentDescription="@string/plus" />
 
             <ImageButton
                 android:id="@+id/imageButton"
                 android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="72dp"
-                android:layout_height="wrap_content"
-                app:srcCompat="@drawable/line_4" />
+                android:contentDescription="@string/plus"
+                app:srcCompat="@drawable/line_4"
+                tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck,ImageContrastCheck,DuplicateSpeakableTextCheck" />
         </FrameLayout>
 
     </LinearLayout>

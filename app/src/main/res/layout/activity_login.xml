@@ -14,45 +14,30 @@
         android:id="@+id/imageView2"
         android:layout_width="150dp"
         android:layout_height="150dp"
-        app:srcCompat="@drawable/img" />
+        app:srcCompat="@drawable/img"
+        android:contentDescription="@string/logo" />
 
     <EditText
         android:id="@+id/emailAddress"
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
+        style="@style/MyStyleForm"
         android:layout_marginTop="15dp"
-        android:background="@drawable/round_btn"
-        android:backgroundTint="@color/first_color"
         android:hint="@string/email_address"
-        android:importantForAutofill="no"
         android:inputType="textEmailAddress"
-        android:padding="15dp"
-        android:textColorHint="#FDCA7E"
-        tools:ignore="TextContrastCheck" />
+        tools:ignore="Autofill,TextContrastCheck,VisualLintTextFieldSize" />
 
     <EditText
         android:id="@+id/password"
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
+        style="@style/MyStyleForm"
         android:layout_marginTop="15dp"
-        android:background="@drawable/round_btn"
-        android:backgroundTint="@color/first_color"
         android:hint="@string/password"
-        android:importantForAutofill="no"
         android:inputType="textPassword"
-        android:padding="15dp"
-        android:textColorHint="#FDCA7E"
-        tools:ignore="TextContrastCheck" />
+        tools:ignore="Autofill,TextContrastCheck,VisualLintTextFieldSize" />
     <Button
         android:id="@+id/login"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="15dp"
+        style="@style/MyStyleButton"
         android:background="@drawable/round_btn"
+        android:layout_marginTop="15dp"
         android:text="@string/login"
-        android:textColor="@color/white"
-        android:textColorHint="#FFFFFF"
         tools:ignore="TextContrastCheck" />
 
     <TextView
@@ -72,7 +57,8 @@
         android:layout_marginTop="15dp"
         android:text="@string/sign_up"
         android:textColor="@color/first_color"
-        android:textSize="20sp"/>
+        android:textSize="20sp"
+        tools:ignore="TextContrastCheck" />
     <ProgressBar
         android:id="@+id/progressbar"
         android:layout_width="match_parent"

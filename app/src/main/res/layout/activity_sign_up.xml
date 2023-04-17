@@ -11,7 +11,8 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        tools:ignore="UselessParent">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -28,98 +29,64 @@
 
             <EditText
                 android:id="@+id/firstName"
-                android:layout_width="match_parent"
-                android:layout_height="48dp"
-                android:autofillHints="nothing"
-                android:background="@drawable/round_btn"
-                android:backgroundTint="@color/first_color"
+                style="@style/MyStyleForm"
                 android:hint="@string/firstName"
                 android:inputType="textPersonName"
-                android:padding="15dp"
-                android:textColorHint="#FDCA7E"
-                tools:ignore="TextContrastCheck" />
+                tools:ignore="TextContrastCheck,VisualLintTextFieldSize"
+                android:autofillHints="" />
             <EditText
                 android:id="@+id/lastName"
-                android:layout_width="match_parent"
-                android:layout_height="48dp"
+                style="@style/MyStyleForm"
                 android:layout_marginTop="15dp"
-                android:autofillHints="nothing"
-                android:background="@drawable/round_btn"
-                android:backgroundTint="@color/first_color"
                 android:hint="@string/lastName"
                 android:inputType="textPersonName"
-                android:padding="15dp"
-                android:textColorHint="#FDCA7E"
-                tools:ignore="TextContrastCheck" />
+                tools:ignore="TextContrastCheck,VisualLintTextFieldSize"
+                android:autofillHints="" />
 
 
             <EditText
                 android:id="@+id/mobileNumber"
-                android:layout_width="match_parent"
-                android:layout_height="48dp"
+                style="@style/MyStyleForm"
                 android:layout_marginTop="15dp"
-                android:background="@drawable/round_btn"
-                android:backgroundTint="@color/first_color"
                 android:hint="@string/mobile_number"
-                android:importantForAutofill="no"
                 android:inputType="number"
                 android:maxLength="14"
-                android:padding="15dp"
-                android:textColorHint="#FDCA7E"
-                tools:ignore="TextContrastCheck" />
+                tools:ignore="TextContrastCheck,VisualLintTextFieldSize"
+                android:autofillHints="" />
 
             <EditText
                 android:id="@+id/emailAddress"
-                android:layout_width="match_parent"
-                android:layout_height="48dp"
+                style="@style/MyStyleForm"
                 android:layout_marginTop="15dp"
-                android:background="@drawable/round_btn"
-                android:backgroundTint="@color/first_color"
                 android:hint="@string/email_address"
-                android:importantForAutofill="no"
                 android:inputType="textEmailAddress"
-                android:padding="15dp"
-                android:textColorHint="#FDCA7E"
-                tools:ignore="TextContrastCheck" />
+                tools:ignore="TextContrastCheck,VisualLintTextFieldSize"
+                android:autofillHints="" />
 
             <EditText
                 android:id="@+id/password"
-                android:layout_width="match_parent"
-                android:layout_height="48dp"
+                style="@style/MyStyleForm"
                 android:layout_marginTop="15dp"
-                android:background="@drawable/round_btn"
-                android:backgroundTint="@color/first_color"
                 android:hint="@string/password"
-                android:importantForAutofill="no"
                 android:inputType="textPassword"
-                android:padding="15dp"
-                android:textColorHint="#FDCA7E"
-                tools:ignore="TextContrastCheck" />
+                tools:ignore="TextContrastCheck,VisualLintTextFieldSize"
+                android:autofillHints="" />
 
             <EditText
                 android:id="@+id/rePassword"
-                android:layout_width="match_parent"
-                android:layout_height="48dp"
+                style="@style/MyStyleForm"
                 android:layout_marginTop="15dp"
-                android:background="@drawable/round_btn"
-                android:backgroundTint="@color/first_color"
                 android:hint="@string/repassword"
-                android:importantForAutofill="no"
                 android:inputType="textPassword"
-                android:padding="15dp"
-                android:textColorHint="#FDCA7E"
-                tools:ignore="TextContrastCheck" />
+                tools:ignore="TextContrastCheck,VisualLintTextFieldSize"
+                android:autofillHints="" />
 
             <Button
                 android:id="@+id/signup"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="15dp"
+                style="@style/MyStyleButton"
                 android:background="@drawable/round_btn"
+                android:layout_marginTop="15dp"
                 android:text="@string/sign_up"
-                android:textColor="@color/white"
-                android:textColorHint="#FFFFFF"
                 tools:ignore="TextContrastCheck" />
 
 
@@ -137,7 +104,7 @@
                 android:id="@+id/progressbar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:visibility="gone"/>
+                android:visibility="gone" />
         </LinearLayout>
     </ScrollView>
 

@@ -9,7 +9,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        tools:ignore="UselessParent">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -34,7 +35,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="start"
-                        app:srcCompat="@drawable/menu" />
+                        app:srcCompat="@drawable/menu"
+                        android:contentDescription="@string/menu" />
 
                     <View
                         android:layout_width="0dp"
@@ -46,7 +48,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="end"
-                        app:srcCompat="@drawable/profile" />
+                        app:srcCompat="@drawable/profile"
+                        android:contentDescription="@string/favorites" />
                 </LinearLayout>
                 <TextView
                     android:id="@+id/textView2"
@@ -71,13 +74,17 @@
                             android:layout_height="match_parent"
                             android:layout_marginTop="5dp"
                             android:orientation="horizontal">
+
                             <androidx.cardview.widget.CardView
                                 android:layout_width="0dp"
+                                android:layout_height="255dp"
                                 android:layout_weight="1"
+                                android:clickable="true"
                                 app:cardCornerRadius="15dp"
                                 app:cardElevation="5dp"
-                                android:clickable="true"
-                                android:layout_height="255dp">
+                                tools:ignore="DuplicateSpeakableTextCheck"
+                                android:focusable="true">
+
                                 <LinearLayout
                                     android:layout_width="match_parent"
                                     android:layout_height="match_parent"
@@ -87,27 +94,32 @@
                                         android:layout_width="wrap_content"
                                         android:layout_height="0dp"
                                         android:layout_weight="1"
-                                        app:srcCompat="@drawable/promax14" />
+                                        app:srcCompat="@drawable/iphone14promax"
+                                        android:contentDescription="@string/product"
+                                        tools:ignore="TooDeepLayout" />
+
                                     <LinearLayout
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
                                         android:gravity="center"
                                         android:orientation="horizontal">
+
                                         <TextView
                                             android:layout_width="93dp"
                                             android:layout_height="wrap_content"
-                                            android:text="1000Dh"
                                             android:layout_weight="1"
-                                            android:textStyle="bold"
+                                            android:text="@string/_1000dh"
                                             android:textColor="@color/textBlack"
-                                            android:textSize="18sp" />
+                                            android:textSize="18sp"
+                                            android:textStyle="bold" />
 
                                         <ImageView
                                             android:id="@+id/add_cart1"
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
                                             android:layout_weight="1"
-                                            android:src="@drawable/add_card" />
+                                            android:src="@drawable/add_card"
+                                            android:contentDescription="@string/add_to_cart" />
 
 
                                     </LinearLayout>
@@ -117,7 +129,7 @@
                             <androidx.cardview.widget.CardView
                                 android:layout_width="0dp"
                                 android:layout_weight="1"
-                                android:layout_marginLeft="5dp"
+                                android:layout_marginStart="5dp"
                                 app:cardCornerRadius="15dp"
                                 android:layout_height="255dp">
                                 <LinearLayout
@@ -129,7 +141,8 @@
                                         android:layout_width="wrap_content"
                                         android:layout_height="0dp"
                                         android:layout_weight="1"
-                                        app:srcCompat="@drawable/promax14" />
+                                        app:srcCompat="@drawable/iphone14promax"
+                                        android:contentDescription="@string/product" />
                                     <LinearLayout
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
@@ -138,7 +151,7 @@
                                         <TextView
                                             android:layout_width="93dp"
                                             android:layout_height="wrap_content"
-                                            android:text="1000Dh"
+                                            android:text="@string/_1000dh"
                                             android:layout_weight="1"
                                             android:textStyle="bold"
                                             android:textColor="@color/textBlack"
@@ -149,7 +162,8 @@
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
                                             android:layout_weight="1"
-                                            android:src="@drawable/add_card" />
+                                            android:src="@drawable/add_card"
+                                            android:contentDescription="@string/add_to_cart"/>
 
 
                                     </LinearLayout>
@@ -177,7 +191,8 @@
                                         android:layout_width="wrap_content"
                                         android:layout_height="0dp"
                                         android:layout_weight="1"
-                                        app:srcCompat="@drawable/promax14" />
+                                        app:srcCompat="@drawable/iphone14promax"
+                                        android:contentDescription="@string/product" />
                                     <LinearLayout
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
@@ -186,7 +201,7 @@
                                         <TextView
                                             android:layout_width="93dp"
                                             android:layout_height="wrap_content"
-                                            android:text="1000Dh"
+                                            android:text="@string/_1000dh"
                                             android:layout_weight="1"
                                             android:textStyle="bold"
                                             android:textColor="@color/textBlack"
@@ -197,7 +212,8 @@
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
                                             android:layout_weight="1"
-                                            android:src="@drawable/add_card" />
+                                            android:src="@drawable/add_card"
+                                            android:contentDescription="@string/add_to_cart"/>
 
 
                                     </LinearLayout>
@@ -207,7 +223,7 @@
                             <androidx.cardview.widget.CardView
                                 android:layout_width="0dp"
                                 android:layout_weight="1"
-                                android:layout_marginLeft="5dp"
+                                android:layout_marginStart="5dp"
                                 app:cardCornerRadius="15dp"
                                 android:layout_height="255dp">
                                 <LinearLayout
@@ -219,7 +235,8 @@
                                         android:layout_width="wrap_content"
                                         android:layout_height="0dp"
                                         android:layout_weight="1"
-                                        app:srcCompat="@drawable/promax14" />
+                                        app:srcCompat="@drawable/iphone14promax"
+                                        android:contentDescription="@string/product" />
                                     <LinearLayout
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
@@ -228,7 +245,7 @@
                                         <TextView
                                             android:layout_width="93dp"
                                             android:layout_height="wrap_content"
-                                            android:text="1000Dh"
+                                            android:text="@string/_1000dh"
                                             android:layout_weight="1"
                                             android:textStyle="bold"
                                             android:textColor="@color/textBlack"
@@ -239,7 +256,8 @@
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
                                             android:layout_weight="1"
-                                            android:src="@drawable/add_card" />
+                                            android:src="@drawable/add_card"
+                                            android:contentDescription="@string/add_to_cart" />
 
 
                                     </LinearLayout>
@@ -266,7 +284,8 @@
                                         android:layout_width="wrap_content"
                                         android:layout_height="0dp"
                                         android:layout_weight="1"
-                                        app:srcCompat="@drawable/promax14" />
+                                        app:srcCompat="@drawable/iphone14promax"
+                                        android:contentDescription="@string/product" />
                                     <LinearLayout
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
@@ -275,7 +294,7 @@
                                         <TextView
                                             android:layout_width="93dp"
                                             android:layout_height="wrap_content"
-                                            android:text="1000Dh"
+                                            android:text="@string/_1000dh"
                                             android:layout_weight="1"
                                             android:textStyle="bold"
                                             android:textColor="@color/textBlack"
@@ -286,7 +305,8 @@
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
                                             android:layout_weight="1"
-                                            android:src="@drawable/add_card" />
+                                            android:src="@drawable/add_card"
+                                            android:contentDescription="@string/add_to_cart" />
 
 
                                     </LinearLayout>
@@ -296,7 +316,7 @@
                             <androidx.cardview.widget.CardView
                                 android:layout_width="0dp"
                                 android:layout_weight="1"
-                                android:layout_marginLeft="5dp"
+                                android:layout_marginStart="5dp"
                                 app:cardCornerRadius="15dp"
                                 android:layout_height="255dp">
                                 <LinearLayout
@@ -308,7 +328,8 @@
                                         android:layout_width="wrap_content"
                                         android:layout_height="0dp"
                                         android:layout_weight="1"
-                                        app:srcCompat="@drawable/promax14" />
+                                        app:srcCompat="@drawable/iphone14promax"
+                                        android:contentDescription="@string/product" />
                                     <LinearLayout
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
@@ -317,7 +338,7 @@
                                         <TextView
                                             android:layout_width="93dp"
                                             android:layout_height="wrap_content"
-                                            android:text="1000Dh"
+                                            android:text="@string/_1000dh"
                                             android:layout_weight="1"
                                             android:textStyle="bold"
                                             android:textColor="@color/textBlack"
@@ -328,7 +349,8 @@
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
                                             android:layout_weight="1"
-                                            android:src="@drawable/add_card" />
+                                            android:src="@drawable/add_card"
+                                            android:contentDescription="@string/add_to_cart" />
 
 
                                     </LinearLayout>
@@ -348,7 +370,8 @@
             <com.google.android.material.bottomnavigation.BottomNavigationView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                app:menu="@menu/bottom_nav_menu"/>
+                app:menu="@menu/bottom_nav_menu"
+                tools:ignore="VisualLintBottomNav" />
         </LinearLayout>
 
     </LinearLayout>
