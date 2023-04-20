@@ -1,8 +1,6 @@
 package com.example.projetmobile_cart;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Patterns;
@@ -13,16 +11,13 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
-    private TextView register, forgotPassword;
     private EditText editTextEmail, editTextPassword;
-    private Button Login;
 
     private FirebaseAuth mAuth;
     private ProgressBar progressBar;
@@ -30,11 +25,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     protected void onCreate (Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        register = (TextView) findViewById(R.id.goToSignUpActivity);
+        TextView register = (TextView) findViewById(R.id.goToSignUpActivity);
         register.setOnClickListener(this);
 
-        Login = (Button) findViewById(R.id.login);
-        Login.setOnClickListener(this);
+        Button login = (Button) findViewById(R.id.login);
+        login.setOnClickListener(this);
 
         editTextEmail = (EditText) findViewById(R.id.emailAddress);
         editTextPassword = (EditText) findViewById(R.id.password);
@@ -42,9 +37,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         progressBar = (ProgressBar) findViewById(R.id.progressbar);
         mAuth = FirebaseAuth.getInstance();
 
-        forgotPassword = (TextView) findViewById(R.id.resetPassword);
+        TextView forgotPassword = (TextView) findViewById(R.id.resetPassword);
         forgotPassword.setOnClickListener(this);
     }
+    @SuppressLint("NonConstantResourceId")
     @Override
     public void onClick(View v){
         switch (v.getId()){
@@ -83,24 +79,22 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             return;
         }
         progressBar.setVisibility(View.VISIBLE);
-        mAuth.signInWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-            @Override
-            public void onComplete(@NonNull Task<AuthResult> task) {
-                if (task.isSuccessful()){
-                    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-                    if(user.isEmailVerified()) {
-                        //redirect to user profile
-                        startActivity(new Intent(LoginActivity.this, HomeActivity.class));
-                        progressBar.setVisibility(View.INVISIBLE);
-                    }else{
-                        user.sendEmailVerification();
-                        Toast.makeText(LoginActivity.this, "Check your email to verify your account!", Toast.LENGTH_LONG).show();
-                        progressBar.setVisibility(View.INVISIBLE);
-                    }
-                }else {
-                    Toast.makeText(LoginActivity.this, "Failed to login! Please check your credentials", Toast.LENGTH_LONG).show();
+        mAuth.signInWithEmailAndPassword(email,password).addOnCompleteListener(task -> {
+            if (task.isSuccessful()){
+                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                assert user != null;
+                if(user.isEmailVerified()) {
+                    //redirect to user profile
+                    startActivity(new Intent(LoginActivity.this, HomeActivity.class));
+                    progressBar.setVisibility(View.INVISIBLE);
+                }else{
+                    user.sendEmailVerification();
+                    Toast.makeText(LoginActivity.this, "Check your email to verify your account!", Toast.LENGTH_LONG).show();
                     progressBar.setVisibility(View.INVISIBLE);
                 }
+            }else {
+                Toast.makeText(LoginActivity.this, "Failed to login! Please check your credentials", Toast.LENGTH_LONG).show();
+                progressBar.setVisibility(View.INVISIBLE);
             }
         });
     }

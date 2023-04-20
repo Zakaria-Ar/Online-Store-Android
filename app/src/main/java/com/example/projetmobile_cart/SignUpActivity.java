@@ -1,8 +1,6 @@
 package com.example.projetmobile_cart;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Patterns;
@@ -13,17 +11,16 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.auth.AuthResult;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.util.Objects;
+
 public class SignUpActivity extends AppCompatActivity {
 
-    private TextView login;
     private EditText editTextEmail, editTextPassword,editTextLastName, editTextFirstName,editTextRePassword,editTextMobileNumber;
-    private Button signUp;
 
     private FirebaseAuth mAuth;
     private FirebaseFirestore firebaseFirestore;
@@ -33,10 +30,10 @@ public class SignUpActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
 
-        login = (TextView) findViewById(R.id.goToLoginActivity);
+        TextView login = (TextView) findViewById(R.id.goToLoginActivity);
         login.setOnClickListener(this::onClick);
 
-        signUp = (Button) findViewById(R.id.signup);
+        Button signUp = (Button) findViewById(R.id.signup);
         signUp.setOnClickListener(this::onClick);
 
         editTextEmail = (EditText) findViewById(R.id.emailAddress);
@@ -52,6 +49,7 @@ public class SignUpActivity extends AppCompatActivity {
 
     }
 
+    @SuppressLint("NonConstantResourceId")
     public void onClick(View v){
         switch (v.getId()){
             case R.id.goToLoginActivity:
@@ -112,22 +110,16 @@ public class SignUpActivity extends AppCompatActivity {
             return;
         }
         progressBar.setVisibility(View.VISIBLE);
-        mAuth.createUserWithEmailAndPassword(email,password).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
-                    @Override
-                    public void onSuccess(AuthResult authResult) {
-                        startActivity(new Intent(SignUpActivity.this,LoginActivity.class));
-                        firebaseFirestore.collection("User")
-                                .document(FirebaseAuth.getInstance().getUid())
-                                .set(new UserModel(firstName,lastName,mobileNumber,email,password));
-                        progressBar.setVisibility(View.INVISIBLE);
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(SignUpActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
-                        progressBar.setVisibility(View.INVISIBLE);
-                    }
+        mAuth.createUserWithEmailAndPassword(email,password).addOnSuccessListener(authResult -> {
+            startActivity(new Intent(SignUpActivity.this,LoginActivity.class));
+            firebaseFirestore.collection("User")
+                    .document(Objects.requireNonNull(FirebaseAuth.getInstance().getUid()))
+                    .set(new UserModel(firstName,lastName,mobileNumber,email,password));
+            progressBar.setVisibility(View.INVISIBLE);
+        })
+                .addOnFailureListener(e -> {
+                    Toast.makeText(SignUpActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                    progressBar.setVisibility(View.INVISIBLE);
                 });
     }
 }
