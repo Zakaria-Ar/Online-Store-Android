@@ -39,6 +39,14 @@ public class HomeActivity extends AppCompatActivity {
                 startActivity(new Intent(HomeActivity.this,ShoppingBasketActivity.class));
             }
         });
+
+        account = (View) findViewById(R.id.menuCreateStore);
+        account.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(HomeActivity.this, CreateStoreActivity.class));
+            }
+        });
         user = FirebaseAuth.getInstance().getCurrentUser();
         firebaseFirestore = FirebaseFirestore.getInstance();
         userID = user.getUid();

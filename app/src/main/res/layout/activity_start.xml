@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/icon_image"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_centerInParent="true"
+        android:contentDescription="@string/logo"
+        android:src="@drawable/img"
+        tools:ignore="ImageContrastCheck" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:orientation="vertical"
+        android:padding="10dp"
+        android:id="@+id/linearLayout">
+
+        <TextView
+            android:id="@+id/banner"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:fontFamily="@font/imprima"
+            android:text="@string/online_store"
+            android:textAlignment="center"
+            android:textSize="40sp"
+            android:textStyle="bold"
+            tools:ignore="TextSizeCheck" />
+
+        <Button
+            android:id="@+id/login2"
+            style="@style/MyStyleButton"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@drawable/round_btn"
+            android:text="@string/login"
+            android:textAllCaps="false"
+            tools:ignore="TextContrastCheck,VisualLintButtonSize" />
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="10dp"/>
+
+        <Button
+            android:id="@+id/register"
+            style="@style/MyStyleButton"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@drawable/round_btn"
+            android:text="@string/register"
+            android:textAllCaps="false"
+            tools:ignore="TextContrastCheck,VisualLintButtonSize" />
+
+    </LinearLayout>
+
+</RelativeLayout>
