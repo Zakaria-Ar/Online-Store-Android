@@ -95,5 +95,6 @@
     <string name="next">Next</string>
     <string name="delete">Delete</string>
     <string name="register">Register</string>
+    <string name="description">Description...</string>
 
 </resources>

@@ -26,7 +26,7 @@ public class HomeActivity extends AppCompatActivity {
         account = (View) findViewById(R.id.menuFavorite);
         account.setOnClickListener(v -> startActivity(new Intent(HomeActivity.this,ShoppingBasketActivity.class)));
         account = (View) findViewById(R.id.menuCreateStore);
-        account.setOnClickListener(v -> startActivity(new Intent(HomeActivity.this, CreateStoreActivity.class)));
+        account.setOnClickListener(v -> startActivity(new Intent(HomeActivity.this, ImportActivity.class)));
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         firebaseFirestore = FirebaseFirestore.getInstance();
         String userID = null;
