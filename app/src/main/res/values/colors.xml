@@ -13,6 +13,9 @@
     <color name="third_color">#CA660A</color>
     <color name="first_color_light">#ffdbb7</color>
     <color name="formText">#FDCA7E</color>
-
+    
+    <color name="red">#C70000</color>
+    <color name="green">#00ff00</color>
+    
     <color name ="app">#FF7A00</color>
 </resources>
