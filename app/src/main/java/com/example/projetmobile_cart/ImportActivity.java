@@ -55,7 +55,7 @@ public class ImportActivity extends AppCompatActivity {
         adapter = new MyAdapter(ImportActivity.this,dataList);
         recyclerView.setAdapter(adapter);
 
-        databaseReference = FirebaseDatabase.getInstance().getReference("Android Tutorials");
+        databaseReference = FirebaseDatabase.getInstance().getReference("Products");
         dialog.show();
 
         eventListener = databaseReference.addValueEventListener(new ValueEventListener() {
