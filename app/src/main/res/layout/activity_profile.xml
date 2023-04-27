@@ -163,10 +163,6 @@
         style="@style/MyStyleButton"
         android:background="@drawable/round_btn"
         android:text="@string/logout"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
         tools:ignore="TextContrastCheck" />
 
     <Button
@@ -175,15 +171,14 @@
         style="@style/MyStyleButton"
         android:background="@drawable/round_btn"
         android:text="Visit my store"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
         tools:ignore="TextContrastCheck" />
-        <ProgressBar
-            android:id="@+id/progressBar"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:visibility="gone"/>
+
+        <Button
+            android:layout_marginTop="20dp"
+            android:id="@+id/editProfile"
+            style="@style/MyStyleButton"
+            android:background="@drawable/round_btn"
+            android:text="Edit Profile"
+            tools:ignore="TextContrastCheck" />
 </LinearLayout>
 </ScrollView>

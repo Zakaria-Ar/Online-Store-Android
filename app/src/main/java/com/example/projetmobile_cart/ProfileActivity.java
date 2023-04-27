@@ -8,7 +8,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -40,6 +39,10 @@ public class ProfileActivity extends AppCompatActivity {
         Button viewStore = (Button) findViewById(R.id.viewStore);
         viewStore.setOnClickListener(v -> {
             startActivity(new Intent(ProfileActivity.this, ImportActivity.class));
+        });
+        Button editProfile = (Button) findViewById(R.id.editProfile);
+        editProfile.setOnClickListener(v -> {
+            startActivity(new Intent(ProfileActivity.this, EditProfileActivity.class));
         });
 
 

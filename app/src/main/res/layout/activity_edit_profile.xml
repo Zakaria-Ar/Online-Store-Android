@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@color/white"
+        tools:ignore="ExtraText">
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:gravity="center"
+            android:text="@string/my_profile"
+            android:textColor="#090909"
+            android:textSize="40sp"
+            android:fontFamily="@font/imprima"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:id="@+id/profilePicture"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:layout_gravity="center"
+            app:srcCompat="@drawable/baseline_account_box_24"
+            tools:ignore="ContentDescription" />
+
+        <LinearLayout
+            android:layout_marginTop="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/firstName"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.3"
+                android:paddingStart="10dp"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:fontFamily="@font/imprima"
+                android:text="@string/firstName" />
+            <EditText
+                android:id="@+id/firstNameResponse"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:paddingLeft="10dp"
+                android:hint="@string/firstName"
+                android:layout_weight="2"
+                android:textColor="@color/black"
+                android:fontFamily="@font/imprima"
+                android:textSize="20sp"
+                android:inputType="text" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_marginTop="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/lastName"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.3"
+                android:paddingStart="10dp"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:fontFamily="@font/imprima"
+                android:text="@string/lastName" />
+            <EditText
+                android:id="@+id/lastNameResponse"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:paddingLeft="10dp"
+                android:hint="@string/lastName"
+                android:layout_weight="2"
+                android:textColor="@color/black"
+                android:fontFamily="@font/imprima"
+                android:textSize="20sp"
+                android:inputType="text"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_marginTop="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/emailAddress"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.3"
+                android:paddingLeft="10dp"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:fontFamily="@font/imprima"
+                android:text="@string/email_address" />
+            <EditText
+                android:id="@+id/emailAddressResponse"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:paddingLeft="10dp"
+                android:hint="@string/email_address"
+                android:layout_weight="2"
+                android:textColor="@color/black"
+                android:fontFamily="@font/imprima"
+                android:textSize="20sp"
+                android:inputType="text"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_marginTop="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/mobileNumber"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.3"
+                android:paddingLeft="10dp"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:fontFamily="@font/imprima"
+                android:text="@string/mobile_number" />
+            <EditText
+                android:id="@+id/mobileNumberResponse"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:paddingLeft="10dp"
+                android:hint="@string/mobile_number"
+                android:layout_weight="2"
+                android:textColor="@color/black"
+                android:fontFamily="@font/imprima"
+                android:textSize="20sp"
+                android:inputType="number" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_marginTop="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/bio"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.3"
+                android:paddingLeft="10dp"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:fontFamily="@font/imprima"
+                android:text="@string/bio" />
+            <EditText
+                android:id="@+id/bioResponse"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:paddingLeft="10dp"
+                android:hint="@string/bio"
+                android:layout_weight="2"
+                android:textColor="@color/black"
+                android:fontFamily="@font/imprima"
+                android:textSize="20sp"
+                android:inputType="text"/>
+        </LinearLayout>
+
+        <Button
+            android:layout_marginTop="20dp"
+            android:id="@+id/saveChanges"
+            style="@style/MyStyleButton"
+            android:background="@drawable/round_btn"
+            android:text="Save Changes"
+            tools:ignore="TextContrastCheck" />
+        <Button
+            android:layout_marginTop="20dp"
+            android:id="@+id/dismissChanges"
+            style="@style/MyStyleButton"
+            android:background="@drawable/round_btn"
+            android:text="Dismiss"
+            tools:ignore="TextContrastCheck" />
+
+    </LinearLayout>
+</ScrollView>

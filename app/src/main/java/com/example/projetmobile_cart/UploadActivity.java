@@ -85,6 +85,11 @@ public class UploadActivity extends AppCompatActivity {
         });
     }
     public void saveData(){
+        if (uri == null) {
+            Toast.makeText(UploadActivity.this,"No Image Selected",Toast.LENGTH_SHORT).show();
+            uploadData();
+            return;
+        }
         StorageReference storageReference = FirebaseStorage.getInstance().getReference().child("Android images")
                 .child(uri.getLastPathSegment());
         AlertDialog.Builder builder = new AlertDialog.Builder(UploadActivity.this);

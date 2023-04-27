@@ -142,8 +142,9 @@ public class UpdateActivity extends AppCompatActivity {
                 @Override
                 public void onComplete(@NonNull Task<Void> task) {
                     if (task.isSuccessful()) {
+                        if (imageUrl != oldImageURL){
                             StorageReference reference = FirebaseStorage.getInstance().getReferenceFromUrl(oldImageURL);
-                            reference.delete();
+                            reference.delete();}
                         Toast.makeText(UpdateActivity.this, "Updated", Toast.LENGTH_SHORT).show();
                         finish();
                     }
