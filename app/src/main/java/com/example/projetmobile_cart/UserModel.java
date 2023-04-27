@@ -1,21 +1,18 @@
 package com.example.projetmobile_cart;
 
-public class UserModel {
-    private String firstName;
-    private String lastName;
-    private String number;
-    private String email;
-    private String password;
+import android.net.Uri;
 
+public class UserModel {
+    private String firstName, lastName, number, email, password, bio;
     public UserModel() {
     }
-
-    public UserModel(String firstName, String lastName, String number, String email, String password) {
+    public UserModel(String firstName, String lastName, String number, String email, String password,String bio) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.number = number;
         this.email = email;
         this.password = password;
+        this.bio = bio;
     }
 
     public UserModel(String firstName, String lastName, String number, String email ) {
@@ -59,4 +56,13 @@ public class UserModel {
     public void setPassword(String password) {
         this.password = password;
     }
+
+    public String getBio() {
+        return bio;
+    }
+
+    public void setBio(String bio) {
+        this.bio = bio;
+    }
+
 }

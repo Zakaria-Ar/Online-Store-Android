@@ -6,7 +6,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-         android:background="@color/white"
+        android:background="@color/white"
         tools:ignore="ExtraText">
 
 
@@ -16,9 +16,10 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="200px"
         android:gravity="center"
-        android:text="My Profil"
+        android:text="@string/my_profile"
         android:textColor="#090909"
         android:textSize="70px"
+        android:layout_gravity="center"
         android:textStyle="bold" />
 
     <LinearLayout
