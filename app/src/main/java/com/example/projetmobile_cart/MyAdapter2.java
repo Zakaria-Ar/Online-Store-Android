@@ -17,32 +17,32 @@ import com.bumptech.glide.Glide;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MyAdapter extends RecyclerView.Adapter<MyViewHolder> {
+public class MyAdapter2 extends RecyclerView.Adapter<MyViewHolder2> {
 
     private Context context;
     private List<DataClass> dataList;
 
-    public MyAdapter(Context context, List<DataClass> dataList) {
+    public MyAdapter2(Context context, List<DataClass> dataList) {
         this.context = context;
         this.dataList = dataList;
     }
 
     @NonNull
     @Override
-    public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public MyViewHolder2 onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.recycler_item,parent,false);
-        return new MyViewHolder(view);
+        return new MyViewHolder2(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull MyViewHolder2 holder, int position) {
         Glide.with(context).load(dataList.get(position).getDataImage()).into(holder.recImage);
         holder.recTitle.setText(dataList.get(position).getDataTitle());
 
         holder.recCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(context,AddToCartActivity.class);
+                Intent intent = new Intent(context,DetailActivity.class);
                 intent.putExtra("Image",dataList.get(holder.getAdapterPosition()).getDataImage());
                 intent.putExtra("Title",dataList.get(holder.getAdapterPosition()).getDataTitle());
                 intent.putExtra("Key",dataList.get(holder.getAdapterPosition()).getKey());
@@ -62,13 +62,13 @@ public class MyAdapter extends RecyclerView.Adapter<MyViewHolder> {
         notifyDataSetChanged();
     }
 }
-class MyViewHolder extends RecyclerView.ViewHolder{
+class MyViewHolder2 extends RecyclerView.ViewHolder{
 
     ImageView recImage;
     TextView recTitle;
     CardView recCard;
 
-    public MyViewHolder(@NonNull View itemView) {
+    public MyViewHolder2(@NonNull View itemView) {
         super(itemView);
 
         recImage = itemView.findViewById(R.id.recImage);

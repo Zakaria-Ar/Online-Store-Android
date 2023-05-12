@@ -50,10 +50,8 @@ public class AccountInformationActivity extends AppCompatActivity {
                     lastNameTextView.setText(lastName);
                     emailTextView.setText(email);
                     mobileNumberTextView.setText(mobileNumber);
-
                 }
             }
-
             @Override
             public void onCancelled(DatabaseError databaseError) {
                 Toast.makeText(AccountInformationActivity.this, "Something Wrong happened !", Toast.LENGTH_LONG).show();

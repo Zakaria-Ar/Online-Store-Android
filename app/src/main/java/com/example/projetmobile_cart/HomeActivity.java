@@ -29,7 +29,7 @@ public class HomeActivity extends AppCompatActivity {
         account = (View) findViewById(R.id.menuFavorite);
         account.setOnClickListener(v -> startActivity(new Intent(HomeActivity.this,ShoppingBasketActivity.class)));
         account = (View) findViewById(R.id.menuCreateStore);
-        account.setOnClickListener(v -> startActivity(new Intent(HomeActivity.this, ImportActivity.class)));
+        account.setOnClickListener(v -> startActivity(new Intent(HomeActivity.this, PrincipalePageActivity.class)));
         account = (View) findViewById(R.id.menuSettings);
         account.setOnClickListener(v -> startActivity(new Intent(HomeActivity.this, AccountInformationActivity.class)));
 
