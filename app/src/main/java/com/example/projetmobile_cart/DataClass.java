@@ -3,7 +3,7 @@ package com.example.projetmobile_cart;
 public class DataClass {
     private String dataTitle;
     private String dataDesc;
-    private String dataLang;
+    private String dataPrice;
     private String dataImage;
     private String key;
 
@@ -23,18 +23,18 @@ public class DataClass {
         return dataDesc;
     }
 
-    public String getDataLang() {
-        return dataLang;
+    public String getDataPrice() {
+        return dataPrice;
     }
 
     public String getDataImage() {
         return dataImage;
     }
 
-    public DataClass(String dataTitle, String dataDesc, String dataLang, String dataImage) {
+    public DataClass(String dataTitle, String dataDesc, String dataPrice, String dataImage) {
         this.dataTitle = dataTitle;
         this.dataDesc = dataDesc;
-        this.dataLang = dataLang;
+        this.dataPrice = dataPrice;
         this.dataImage = dataImage;
     }
 

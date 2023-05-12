@@ -28,7 +28,7 @@ public class ImportActivity extends AppCompatActivity {
     DatabaseReference databaseReference;
     ValueEventListener eventListener;
     SearchView searchView;
-    MyAdapter adapter;
+    MyAdapter2 adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,7 +52,7 @@ public class ImportActivity extends AppCompatActivity {
 
         dataList = new ArrayList<>();
 
-        adapter = new MyAdapter(ImportActivity.this,dataList);
+        adapter = new MyAdapter2(ImportActivity.this,dataList);
         recyclerView.setAdapter(adapter);
 
         databaseReference = FirebaseDatabase.getInstance().getReference("Products");

@@ -19,7 +19,7 @@ import com.google.firebase.storage.StorageReference;
 
 public class DetailActivity extends AppCompatActivity {
 
-    TextView detailDesc, detailTitle,detailLang;
+    TextView detailDesc, detailTitle,detailPrice;
     ImageView detailImage;
     FloatingActionButton deleteButton,editButton;
     String key = "";
@@ -34,14 +34,14 @@ public class DetailActivity extends AppCompatActivity {
         detailTitle = findViewById(R.id.detailTitle);
         detailImage = findViewById(R.id.detailImage);
         deleteButton = findViewById(R.id.deleteButton);
-        detailLang = findViewById(R.id.detailLang);
+        detailPrice = findViewById(R.id.detailPrice);
         editButton = findViewById(R.id.editButton);
 
         Bundle bundle = getIntent().getExtras();
         if (bundle !=null){
             detailDesc.setText(bundle.getString("Description"));
             detailTitle.setText(bundle.getString("Title"));
-            detailLang.setText(bundle.getString("Language"));
+            detailPrice.setText(bundle.getString("Price"));
             key = bundle.getString("Key");
             imageUrl = bundle.getString("Image");
             Glide.with(this).load(bundle.getString("Image")).into(detailImage);
@@ -69,7 +69,7 @@ public class DetailActivity extends AppCompatActivity {
                 Intent intent = new Intent(DetailActivity.this, UpdateActivity.class)
                         .putExtra("Title",detailTitle.getText().toString())
                         .putExtra("Description",detailDesc.getText().toString())
-                        .putExtra("Language",detailLang.getText().toString())
+                        .putExtra("Price",detailPrice.getText().toString())
                         .putExtra("Image",imageUrl)
                         .putExtra("Key",key);
                 startActivity(intent);

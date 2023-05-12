@@ -37,11 +37,11 @@ public class AddToCartActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_to_cart);
-        imageSlider = findViewById(R.id.image_slider);
+        /*imageSlider = findViewById(R.id.image_slider);
         imageList.add(new SlideModel(R.drawable.iphone1, ScaleTypes.FIT));
         imageList.add(new SlideModel(R.drawable.iphone2, ScaleTypes.FIT));
         imageList.add(new SlideModel(R.drawable.iphone3, ScaleTypes.FIT));
-        imageSlider.setImageList(imageList);
+        imageSlider.setImageList(imageList);*/
         detailDesc = findViewById(R.id.detailDesc);
         detailTitle = findViewById(R.id.detailTitle);
         detailImage = findViewById(R.id.productImage);
@@ -52,7 +52,6 @@ public class AddToCartActivity extends AppCompatActivity {
             detailDesc.setText(bundle.getString("Description"));
             detailTitle.setText(bundle.getString("Title"));
             detailLang.setText(bundle.getString("Price"));
-
             key = bundle.getString("Key");
             imageUrl = bundle.getString("Image");
             Glide.with(this).load(bundle.getString("Image")).into(detailImage);

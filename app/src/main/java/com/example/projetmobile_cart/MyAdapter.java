@@ -45,6 +45,8 @@ public class MyAdapter extends RecyclerView.Adapter<MyViewHolder> {
                 Intent intent = new Intent(context,AddToCartActivity.class);
                 intent.putExtra("Image",dataList.get(holder.getAdapterPosition()).getDataImage());
                 intent.putExtra("Title",dataList.get(holder.getAdapterPosition()).getDataTitle());
+                intent.putExtra("Price",dataList.get(holder.getAdapterPosition()).getDataPrice());
+                intent.putExtra("Description",dataList.get(holder.getAdapterPosition()).getDataDesc());
                 intent.putExtra("Key",dataList.get(holder.getAdapterPosition()).getKey());
 
                 context.startActivity(intent);
@@ -65,7 +67,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyViewHolder> {
 class MyViewHolder extends RecyclerView.ViewHolder{
 
     ImageView recImage;
-    TextView recTitle;
+    TextView recTitle,recPrice,recDesc;
     CardView recCard;
 
     public MyViewHolder(@NonNull View itemView) {
@@ -74,5 +76,7 @@ class MyViewHolder extends RecyclerView.ViewHolder{
         recImage = itemView.findViewById(R.id.recImage);
         recTitle = itemView.findViewById(R.id.recTitle);
         recCard = itemView.findViewById(R.id.recCard);
+        recPrice = itemView.findViewById(R.id.productPrice); //problem here
+        recDesc = itemView.findViewById(R.id.detailDesc);
     }
 }

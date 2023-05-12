@@ -121,14 +121,14 @@
                 android:text="@string/addToCart" />
         </LinearLayout>
 
-        <com.denzcoskun.imageslider.ImageSlider
+        <!--<com.denzcoskun.imageslider.ImageSlider
             android:id="@+id/image_slider"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             app:iss_auto_cycle="true"
             app:iss_delay="1000"
             app:iss_period="1000"
-            app:iss_text_align="CENTER" />
+            app:iss_text_align="CENTER" />-->
     </LinearLayout>
 </RelativeLayout>
 </ScrollView>
