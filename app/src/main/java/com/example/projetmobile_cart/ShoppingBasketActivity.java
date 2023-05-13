@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -41,6 +42,7 @@ public class ShoppingBasketActivity extends AppCompatActivity {
         // Initialize favoriteAdapter
         favoriteAdapter = new FavoriteAdapter(favoriteList);
         recyclerView.setAdapter(favoriteAdapter);
+        calculateTotalPrice();
     }
 
     @Override
@@ -80,4 +82,43 @@ public class ShoppingBasketActivity extends AppCompatActivity {
             });
         }
     }
+    private void calculateTotalPrice() {
+        DatabaseReference favoritesRef = FirebaseDatabase.getInstance().getReference("favorites");
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
+        if (user != null) {
+            String userId = user.getUid();
+            DatabaseReference userFavoritesRef = favoritesRef.child(userId);
+
+            userFavoritesRef.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    int totalPrice = 0;
+
+                    for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                        Favorite favorite = snapshot.getValue(Favorite.class);
+                        String priceString = favorite != null ? favorite.getDataPrice() : "0";
+                        int price = 0;
+
+                        try {
+                            price = Integer.parseInt(priceString);
+                        } catch (NumberFormatException e) {
+                            e.printStackTrace();
+                        }
+
+                        totalPrice += price;
+                    }
+
+                    TextView prixTotalTextView = findViewById(R.id.prix_total);
+                    prixTotalTextView.setText(String.valueOf(totalPrice) + " DH");
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+                    // Handle database error if necessary
+                }
+            });
+        }
+    }
+
 }
