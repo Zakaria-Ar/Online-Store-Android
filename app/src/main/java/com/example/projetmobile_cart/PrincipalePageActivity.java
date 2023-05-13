@@ -100,5 +100,6 @@ public class PrincipalePageActivity extends AppCompatActivity {
                                 Toast.LENGTH_SHORT).show();
                     }
                 });
+
     }
 }

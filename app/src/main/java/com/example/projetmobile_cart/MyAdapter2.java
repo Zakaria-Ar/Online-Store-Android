@@ -45,6 +45,8 @@ public class MyAdapter2 extends RecyclerView.Adapter<MyViewHolder2> {
                 Intent intent = new Intent(context,DetailActivity.class);
                 intent.putExtra("Image",dataList.get(holder.getAdapterPosition()).getDataImage());
                 intent.putExtra("Title",dataList.get(holder.getAdapterPosition()).getDataTitle());
+                intent.putExtra("Price",dataList.get(holder.getAdapterPosition()).getDataPrice());
+                intent.putExtra("Description",dataList.get(holder.getAdapterPosition()).getDataDesc());
                 intent.putExtra("Key",dataList.get(holder.getAdapterPosition()).getKey());
 
                 context.startActivity(intent);
@@ -65,7 +67,7 @@ public class MyAdapter2 extends RecyclerView.Adapter<MyViewHolder2> {
 class MyViewHolder2 extends RecyclerView.ViewHolder{
 
     ImageView recImage;
-    TextView recTitle;
+    TextView recTitle,recPrice,recDesc;
     CardView recCard;
 
     public MyViewHolder2(@NonNull View itemView) {
@@ -73,6 +75,8 @@ class MyViewHolder2 extends RecyclerView.ViewHolder{
 
         recImage = itemView.findViewById(R.id.recImage);
         recTitle = itemView.findViewById(R.id.recTitle);
+        recPrice = itemView.findViewById(R.id.detailPrice);
+        recDesc = itemView.findViewById(R.id.detailDesc);
         recCard = itemView.findViewById(R.id.recCard);
     }
 }
