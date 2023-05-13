@@ -1,8 +1,8 @@
 package com.example.projetmobile_cart;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -10,38 +10,27 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.bumptech.glide.Glide;
-import com.denzcoskun.imageslider.ImageSlider;
-import com.denzcoskun.imageslider.constants.ScaleTypes;
-import com.denzcoskun.imageslider.models.SlideModel;
-import com.github.clans.fab.FloatingActionButton;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageReference;
-
-import java.util.ArrayList;
-import java.util.List;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 
 public class AddToCartActivity extends AppCompatActivity {
-    List<SlideModel> imageList = new ArrayList<>();
-    ImageSlider imageSlider;
-
     TextView detailDesc, detailTitle,detailLang;
     ImageView detailImage;
-    //FloatingActionButton deleteButton,editButton;
     String key = "";
     String imageUrl = "";
-
+    private DatabaseReference databaseReference;
+    private FirebaseAuth firebaseAuth;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_to_cart);
-        /*imageSlider = findViewById(R.id.image_slider);
-        imageList.add(new SlideModel(R.drawable.iphone1, ScaleTypes.FIT));
-        imageList.add(new SlideModel(R.drawable.iphone2, ScaleTypes.FIT));
-        imageList.add(new SlideModel(R.drawable.iphone3, ScaleTypes.FIT));
-        imageSlider.setImageList(imageList);*/
         detailDesc = findViewById(R.id.detailDesc);
         detailTitle = findViewById(R.id.detailTitle);
         detailImage = findViewById(R.id.productImage);
@@ -56,34 +45,113 @@ public class AddToCartActivity extends AppCompatActivity {
             imageUrl = bundle.getString("Image");
             Glide.with(this).load(bundle.getString("Image")).into(detailImage);
         }
-        /*deleteButton.setOnClickListener(new View.OnClickListener() {
+
+        ImageView imageViewFavorites = findViewById(R.id.imageView2);
+        imageViewFavorites.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                final DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Products");
-                FirebaseStorage storage = FirebaseStorage.getInstance();
-                StorageReference storageReference = storage.getReferenceFromUrl(imageUrl);
-                storageReference.delete().addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void unused) {
-                        reference.child(key).removeValue();
-                        Toast.makeText(AddToCartActivity.this, "Deleted", Toast.LENGTH_SHORT).show();
-                        startActivity(new Intent(getApplicationContext(), ImportActivity.class));
-                        finish();
-                    }
-                });
+                addToFavorites();
             }
         });
-        /editButton.setOnClickListener(new View.OnClickListener() {
+        ImageView goBackImageView = findViewById(R.id.goBack);
+        goBackImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(AddToCartActivity.this, UpdateActivity.class)
-                        .putExtra("Title",detailTitle.getText().toString())
-                        .putExtra("Description",detailDesc.getText().toString())
-                        .putExtra("Language",detailLang.getText().toString())
-                        .putExtra("Image",imageUrl)
-                        .putExtra("Key",key);
-                startActivity(intent);
+                // Handle the click event here
+                onBackPressed(); // Go back to the previous activity
             }
-        });*/
+        });
+        Button addToCartButton = findViewById(R.id.addToCartBtn);
+        addToCartButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                addToCart();
+            }
+        });
+    }
+    private void addToFavorites() {
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        DatabaseReference favoritesRef = FirebaseDatabase.getInstance().getReference("favorites");
+
+        if (user != null) {
+            String userId = user.getUid();
+
+            DatabaseReference userFavoritesRef = favoritesRef.child(userId);
+
+            // Check if the product already exists in favorites
+            Query query = userFavoritesRef.orderByChild("dataTitle").equalTo(detailTitle.getText().toString());
+            query.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    if (dataSnapshot.exists()) {
+                        Toast.makeText(AddToCartActivity.this, "Product already added to favorites", Toast.LENGTH_SHORT).show();
+                    } else {
+                        String favoriteId = userFavoritesRef.push().getKey();
+
+                        Favorite favorite = new Favorite();
+                        favorite.setDataDesc(detailDesc.getText().toString());
+                        favorite.setDataImage(imageUrl);
+                        favorite.setDataPrice(detailLang.getText().toString());
+                        favorite.setDataTitle(detailTitle.getText().toString());
+
+                        userFavoritesRef.child(favoriteId).setValue(favorite)
+                                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                    @Override
+                                    public void onSuccess(Void aVoid) {
+                                        Toast.makeText(AddToCartActivity.this, "Added to favorites", Toast.LENGTH_SHORT).show();
+                                    }
+                                });
+                    }
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+                    // Handle database error if necessary
+                }
+            });
+        }
+    }
+
+    private void addToCart() {
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        DatabaseReference favoritesRef = FirebaseDatabase.getInstance().getReference("Basket");
+
+        if (user != null) {
+            String userId = user.getUid();
+
+            DatabaseReference userFavoritesRef = favoritesRef.child(userId);
+
+            // Check if the product already exists in favorites
+            Query query = userFavoritesRef.orderByChild("dataTitle").equalTo(detailTitle.getText().toString());
+            query.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    if (dataSnapshot.exists()) {
+                        Toast.makeText(AddToCartActivity.this, "Product already added to Basket", Toast.LENGTH_SHORT).show();
+                    } else {
+                        String favoriteId = userFavoritesRef.push().getKey();
+
+                        Basket basket = new Basket();
+                        basket.setDataDesc(detailDesc.getText().toString());
+                        basket.setDataImage(imageUrl);
+                        basket.setDataPrice(detailLang.getText().toString());
+                        basket.setDataTitle(detailTitle.getText().toString());
+
+                        userFavoritesRef.child(favoriteId).setValue(basket)
+                                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                    @Override
+                                    public void onSuccess(Void aVoid) {
+                                        Toast.makeText(AddToCartActivity.this, "Added to Basket", Toast.LENGTH_SHORT).show();
+                                    }
+                                });
+                    }
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+                    // Handle database error if necessary
+                }
+            });
+        }
     }
 }
