@@ -21,7 +21,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
     @NonNull
     @Override
     public ItemViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.list, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_favorite, parent, false);
         return new ItemViewHolder(view);
     }
 
@@ -50,11 +50,11 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
 
         public ItemViewHolder(@NonNull View itemView) {
             super(itemView);
-            imageView = itemView.findViewById(R.id.imageay);
-            nameTextView = itemView.findViewById(R.id.textView1ay);
-            descriptionTextView = itemView.findViewById(R.id.textView2ay);
-            priceTextView =itemView.findViewById(R.id.textView3ay);
-            quaTextview=itemView.findViewById(R.id.textViewqua);
+            imageView = itemView.findViewById(R.id.favoriteImage);
+            nameTextView = itemView.findViewById(R.id.favoriteTitle);
+            descriptionTextView = itemView.findViewById(R.id.favoriteDesc);
+            priceTextView =itemView.findViewById(R.id.favoritePrice);
+            quaTextview=itemView.findViewById(R.id.favoriteDesc);
         }
     }
 }

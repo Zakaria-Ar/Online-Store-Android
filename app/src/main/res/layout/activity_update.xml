@@ -42,7 +42,7 @@
                 android:layout_marginTop="20dp"
                 android:background="@drawable/first_color_border"
                 android:padding="16dp"
-                android:hint="Enter topic name"
+                android:hint="Enter product name"
                 android:gravity="start|center_horizontal"
                 android:textColor="@color/first_color"/>
             <EditText
@@ -58,11 +58,12 @@
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
-                android:id="@+id/updateLang"
+                android:id="@+id/updatePrice"
                 android:layout_marginTop="20dp"
+                android:inputType="number"
                 android:background="@drawable/first_color_border"
                 android:padding="16dp"
-                android:hint="Enter language"
+                android:hint="Enter Price"
                 android:gravity="start|center_horizontal"
                 android:textColor="@color/first_color"/>
             <Button

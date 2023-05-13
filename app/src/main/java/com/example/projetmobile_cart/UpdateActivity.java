@@ -33,8 +33,8 @@ public class UpdateActivity extends AppCompatActivity {
 
     ImageView updateImage;
     Button updateButton;
-    EditText updateDesc, updateTitle, updateLang;
-    String desc, title, lang;
+    EditText updateDesc, updateTitle, updatePrice;
+    String desc, title, price;
     String imageUrl;
     String key, oldImageURL;
     Uri uri;
@@ -47,7 +47,7 @@ public class UpdateActivity extends AppCompatActivity {
         setContentView(R.layout.activity_update);
 
         updateButton = findViewById(R.id.updateButton);
-        updateLang = findViewById(R.id.updateLang);
+        updatePrice = findViewById(R.id.updatePrice);
         updateDesc = findViewById(R.id.updateDesc);
         updateTitle = findViewById(R.id.updateTopic);
         updateImage = findViewById(R.id.updateImage);
@@ -74,7 +74,7 @@ public class UpdateActivity extends AppCompatActivity {
             Glide.with(UpdateActivity.this).load(bundle.getString("Image")).into(updateImage);
             updateTitle.setText(bundle.getString("Title"));
             updateDesc.setText(bundle.getString("Description"));
-            updateLang.setText(bundle.getString("Language"));
+            updatePrice.setText(bundle.getString("Price"));
             key = bundle.getString("Key");
             oldImageURL = bundle.getString("Image");
         }
@@ -134,10 +134,10 @@ public class UpdateActivity extends AppCompatActivity {
     public void updateData() {
         title = updateTitle.getText().toString().trim();
         desc = updateDesc.getText().toString().trim();
-        lang = updateLang.getText().toString();
+        price = updatePrice.getText().toString();
 
 
-            DataClass dataClass = new DataClass(title, desc, lang, imageUrl);
+            DataClass dataClass = new DataClass(title, desc, price, imageUrl);
             databaseReference.setValue(dataClass).addOnCompleteListener(new OnCompleteListener<Void>() {
                 @Override
                 public void onComplete(@NonNull Task<Void> task) {

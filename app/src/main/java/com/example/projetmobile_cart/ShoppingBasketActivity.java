@@ -7,31 +7,77 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import org.checkerframework.checker.nullness.qual.NonNull;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class ShoppingBasketActivity extends AppCompatActivity {
 
-    @SuppressLint("MissingInflatedId")
+    private RecyclerView recyclerView;
+    private FavoriteAdapter favoriteAdapter;
+    private List<Favorite> favoriteList;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_shopping_basket);
 
-        RecyclerView recyclerView = findViewById(R.id.recyclerview);
-        List<Item> itemList = new ArrayList<>();
-        ItemAdapter itemAdapter = new ItemAdapter(itemList);
+        // Initialize RecyclerView
+        recyclerView = findViewById(R.id.recyclerview);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false);
-        recyclerView.setLayoutManager(layoutManager);
-        recyclerView.setAdapter(itemAdapter);
+        // Initialize favoriteList
+        favoriteList = new ArrayList<>();
 
-        // Add items to  itemList for being viewed at RecyclerView
-        itemList.add(new Item(R.drawable.item1, "Item 1", "Description 1", "10$","x1"));
-        itemList.add(new Item(R.drawable.item2, "Item 2", "Description 2", "15$","x2"));
-        itemList.add(new Item(R.drawable.item3, "Item 3", "Description 3", "20$","x1"));
-        itemList.add(new Item(R.drawable.item4, "Item 4", "Description 4", "25$","x3"));
-        itemList.add(new Item(R.drawable.item5, "Item 5", "Description 5", "30$","x5"));
+        // Initialize favoriteAdapter
+        favoriteAdapter = new FavoriteAdapter(favoriteList);
+        recyclerView.setAdapter(favoriteAdapter);
+    }
 
-}
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        // Load favorite items from Firebase Realtime Database
+        loadFavoriteItems();
+    }
+
+    private void loadFavoriteItems() {
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
+        if (user != null) {
+            String userId = user.getUid();
+
+            DatabaseReference userFavoritesRef = FirebaseDatabase.getInstance().getReference("favorites")
+                    .child(userId);
+
+            userFavoritesRef.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    favoriteList.clear();
+
+                    for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                        Favorite favorite = snapshot.getValue(Favorite.class);
+                        favoriteList.add(favorite);
+                    }
+
+                    favoriteAdapter.notifyDataSetChanged();
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+                    // Handle database error if needed
+                }
+            });
+        }
+    }
 }
