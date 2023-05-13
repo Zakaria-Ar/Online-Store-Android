@@ -63,7 +63,7 @@
                 android:inputType="number"
                 android:background="@drawable/first_color_border"
                 android:padding="16dp"
-                android:hint="Enter Price"
+                android:hint="Enter Price (in DH)"
                 android:gravity="start|center_horizontal"
                 android:textColor="@color/first_color"/>
             <Button
