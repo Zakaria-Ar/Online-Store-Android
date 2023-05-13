@@ -24,8 +24,8 @@ import java.util.List;
 public class ShoppingBasketActivity extends AppCompatActivity {
 
     private RecyclerView recyclerView;
-    private FavoriteAdapter favoriteAdapter;
-    private List<Favorite> favoriteList;
+    private BasketAdapter basketAdapter;
+    private List<Basket> basketList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,12 +36,12 @@ public class ShoppingBasketActivity extends AppCompatActivity {
         recyclerView = findViewById(R.id.recyclerview);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        // Initialize favoriteList
-        favoriteList = new ArrayList<>();
+        // Initialize basketList
+        basketList = new ArrayList<>();
 
-        // Initialize favoriteAdapter
-        favoriteAdapter = new FavoriteAdapter(favoriteList);
-        recyclerView.setAdapter(favoriteAdapter);
+        // Initialize basketAdapter
+        basketAdapter = new BasketAdapter(basketList);
+        recyclerView.setAdapter(basketAdapter);
         calculateTotalPrice();
     }
 
@@ -49,30 +49,30 @@ public class ShoppingBasketActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
 
-        // Load favorite items from Firebase Realtime Database
-        loadFavoriteItems();
+        // Load basket items from Firebase Realtime Database
+        loadBasketItems();
     }
 
-    private void loadFavoriteItems() {
+    private void loadBasketItems() {
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
         if (user != null) {
             String userId = user.getUid();
 
-            DatabaseReference userFavoritesRef = FirebaseDatabase.getInstance().getReference("favorites")
+            DatabaseReference userBasketRef = FirebaseDatabase.getInstance().getReference("Basket")
                     .child(userId);
 
-            userFavoritesRef.addValueEventListener(new ValueEventListener() {
+            userBasketRef.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                    favoriteList.clear();
+                    basketList.clear();
 
                     for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                        Favorite favorite = snapshot.getValue(Favorite.class);
-                        favoriteList.add(favorite);
+                        Basket basket = snapshot.getValue(Basket.class);
+                        basketList.add(basket);
                     }
 
-                    favoriteAdapter.notifyDataSetChanged();
+                    basketAdapter.notifyDataSetChanged();
                 }
 
                 @Override
@@ -83,21 +83,21 @@ public class ShoppingBasketActivity extends AppCompatActivity {
         }
     }
     private void calculateTotalPrice() {
-        DatabaseReference favoritesRef = FirebaseDatabase.getInstance().getReference("favorites");
+        DatabaseReference basketRef = FirebaseDatabase.getInstance().getReference("Basket");
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
         if (user != null) {
             String userId = user.getUid();
-            DatabaseReference userFavoritesRef = favoritesRef.child(userId);
+            DatabaseReference userBasketRef = basketRef.child(userId);
 
-            userFavoritesRef.addValueEventListener(new ValueEventListener() {
+            userBasketRef.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
                     int totalPrice = 0;
 
                     for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                        Favorite favorite = snapshot.getValue(Favorite.class);
-                        String priceString = favorite != null ? favorite.getDataPrice() : "0";
+                        Basket basket = snapshot.getValue(Basket.class);
+                        String priceString = basket != null ? basket.getDataPrice() : "0";
                         int price = 0;
 
                         try {

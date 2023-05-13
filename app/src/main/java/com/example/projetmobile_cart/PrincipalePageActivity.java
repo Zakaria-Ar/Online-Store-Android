@@ -72,7 +72,7 @@ public class PrincipalePageActivity extends AppCompatActivity {
         account.setOnClickListener(v -> startActivity(new Intent(PrincipalePageActivity.this, ShoppingBasketActivity.class)));
 
         account = findViewById(R.id.menuCreateStore);
-        account.setOnClickListener(v -> startActivity(new Intent(PrincipalePageActivity.this, ImportActivity.class)));
+        account.setOnClickListener(v -> startActivity(new Intent(PrincipalePageActivity.this, FavoriteActivity.class)));
 
         account = findViewById(R.id.menuSettings);
         account.setOnClickListener(v -> startActivity(new Intent(PrincipalePageActivity.this, AccountInformationActivity.class)));
