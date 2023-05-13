@@ -40,7 +40,7 @@ public class AddToCartActivity extends AppCompatActivity {
         if (bundle != null) {
             detailDesc.setText(bundle.getString("Description"));
             detailTitle.setText(bundle.getString("Title"));
-            detailLang.setText(bundle.getString("Price"));
+            detailLang.setText(bundle.getString("Price")+ " DH");
             key = bundle.getString("Key");
             imageUrl = bundle.getString("Image");
             Glide.with(this).load(bundle.getString("Image")).into(detailImage);
@@ -91,8 +91,14 @@ public class AddToCartActivity extends AppCompatActivity {
                         Favorite favorite = new Favorite();
                         favorite.setDataDesc(detailDesc.getText().toString());
                         favorite.setDataImage(imageUrl);
-                        favorite.setDataPrice(detailLang.getText().toString());
                         favorite.setDataTitle(detailTitle.getText().toString());
+
+                        String price = detailLang.getText().toString();
+                        if (!price.isEmpty()) {
+                            favorite.setDataPrice(price + " DH");
+                        } else {
+                            favorite.setDataPrice(""); // Set an empty string if no price is available
+                        }
 
                         userFavoritesRef.child(favoriteId).setValue(favorite)
                                 .addOnSuccessListener(new OnSuccessListener<Void>() {
@@ -134,8 +140,14 @@ public class AddToCartActivity extends AppCompatActivity {
                         Basket basket = new Basket();
                         basket.setDataDesc(detailDesc.getText().toString());
                         basket.setDataImage(imageUrl);
-                        basket.setDataPrice(detailLang.getText().toString());
                         basket.setDataTitle(detailTitle.getText().toString());
+
+                        String price = detailLang.getText().toString();
+                        if (!price.isEmpty()) {
+                            basket.setDataPrice(price + " DH");
+                        } else {
+                            basket.setDataPrice("No price available"); // Set a default message when no price is available
+                        }
 
                         userFavoritesRef.child(favoriteId).setValue(basket)
                                 .addOnSuccessListener(new OnSuccessListener<Void>() {
@@ -154,4 +166,5 @@ public class AddToCartActivity extends AppCompatActivity {
             });
         }
     }
+
 }

@@ -1,5 +1,4 @@
 package com.example.projetmobile_cart;
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -14,6 +13,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
@@ -82,6 +82,7 @@ public class ShoppingBasketActivity extends AppCompatActivity {
             });
         }
     }
+
     private void calculateTotalPrice() {
         DatabaseReference basketRef = FirebaseDatabase.getInstance().getReference("Basket");
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
@@ -97,16 +98,18 @@ public class ShoppingBasketActivity extends AppCompatActivity {
 
                     for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                         Basket basket = snapshot.getValue(Basket.class);
-                        String priceString = basket != null ? basket.getDataPrice() : "0";
-                        int price = 0;
+                        if (basket != null) {
+                            String priceString = basket.getDataPrice().replaceAll("[^\\d.]", ""); // Remove non-digit characters
+                            int price = 0;
 
-                        try {
-                            price = Integer.parseInt(priceString);
-                        } catch (NumberFormatException e) {
-                            e.printStackTrace();
+                            try {
+                                price = Integer.parseInt(priceString);
+                            } catch (NumberFormatException e) {
+                                e.printStackTrace();
+                            }
+
+                            totalPrice += price;
                         }
-
-                        totalPrice += price;
                     }
 
                     TextView prixTotalTextView = findViewById(R.id.prix_total);

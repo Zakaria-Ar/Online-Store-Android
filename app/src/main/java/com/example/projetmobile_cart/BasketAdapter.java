@@ -1,15 +1,14 @@
 package com.example.projetmobile_cart;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.projetmobile_cart.Basket;
-import com.example.projetmobile_cart.R;
+import com.bumptech.glide.Glide;
 
 import java.util.List;
 
@@ -39,12 +38,14 @@ public class BasketAdapter extends RecyclerView.Adapter<BasketAdapter.ViewHolder
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
+        private ImageView imageView;
         private TextView titleTextView;
         private TextView priceTextView;
         private TextView descriptionTextView;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
+            imageView = itemView.findViewById(R.id.basketImage);
             titleTextView = itemView.findViewById(R.id.basketTitle);
             priceTextView = itemView.findViewById(R.id.basketPrice);
             descriptionTextView = itemView.findViewById(R.id.basketDesc);
@@ -54,6 +55,10 @@ public class BasketAdapter extends RecyclerView.Adapter<BasketAdapter.ViewHolder
             titleTextView.setText(basket.getDataTitle());
             priceTextView.setText(basket.getDataPrice());
             descriptionTextView.setText(basket.getDataDesc());
+
+            Glide.with(itemView.getContext())
+                    .load(basket.getDataImage())
+                    .into(imageView);
         }
     }
 }
