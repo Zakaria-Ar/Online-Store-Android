@@ -114,7 +114,7 @@ public class SignUpActivity extends AppCompatActivity {
             mRootRef.child("Users").child(mAuth.getCurrentUser().getUid()).setValue(map).addOnCompleteListener(task -> {
                 if (task.isSuccessful()){
                     pd.dismiss();
-                    Intent intent = new Intent(SignUpActivity.this , HomeActivity.class);
+                    Intent intent = new Intent(SignUpActivity.this , PrincipalePageActivity.class);
                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     startActivity(intent);
                     finish();

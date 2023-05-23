@@ -74,9 +74,6 @@ public class PrincipalePageActivity extends AppCompatActivity {
         account = findViewById(R.id.menuCreateStore);
         account.setOnClickListener(v -> startActivity(new Intent(PrincipalePageActivity.this, FavoriteActivity.class)));
 
-        account = findViewById(R.id.menuSettings);
-        account.setOnClickListener(v -> startActivity(new Intent(PrincipalePageActivity.this, AccountInformationActivity.class)));
-
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         assert user != null;
         String userID = user.getUid();
