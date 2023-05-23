@@ -19,8 +19,9 @@ android {
 
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            shrinkResources true
         }
     }
     buildFeatures{
@@ -46,11 +47,6 @@ dependencies {
     implementation 'com.google.firebase:firebase-functions:20.2.2'
 
     implementation 'androidx.compose.animation:animation-core:1.1.1'
-/*
-
-
-   implementation 'com.hendraanggrian.appcompat:socialview:0.3-rc1'
-    implementation 'com.hendraanggrian.appcompat:socialview-commons:0.3-rc1'*/
     implementation 'com.squareup.picasso:picasso:2.5.2'
     implementation 'com.github.CanHub:Android-Image-Cropper:4.3.2'
 
