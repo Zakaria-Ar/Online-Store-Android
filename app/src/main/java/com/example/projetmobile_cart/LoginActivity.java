@@ -17,82 +17,100 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
-    private EditText editTextEmail, editTextPassword;
 
+    private EditText editTextEmail, editTextPassword;
     private FirebaseAuth mAuth;
     private ProgressBar progressBar;
+
     @Override
-    protected void onCreate (Bundle savedInstanceState){
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        TextView register = (TextView) findViewById(R.id.goToSignUpActivity);
+
+        // Set up click listeners for buttons and text views
+        TextView register = findViewById(R.id.goToSignUpActivity);
         register.setOnClickListener(this);
 
-        Button login = (Button) findViewById(R.id.login);
+        Button login = findViewById(R.id.login);
         login.setOnClickListener(this);
 
-        editTextEmail = (EditText) findViewById(R.id.emailAddress);
-        editTextPassword = (EditText) findViewById(R.id.password);
+        editTextEmail = findViewById(R.id.emailAddress);
+        editTextPassword = findViewById(R.id.password);
 
-        progressBar = (ProgressBar) findViewById(R.id.progressbar);
+        progressBar = findViewById(R.id.progressbar);
         mAuth = FirebaseAuth.getInstance();
 
-        TextView forgotPassword = (TextView) findViewById(R.id.resetPassword);
+        TextView forgotPassword = findViewById(R.id.resetPassword);
         forgotPassword.setOnClickListener(this);
     }
+
     @SuppressLint("NonConstantResourceId")
     @Override
-    public void onClick(View v){
-        switch (v.getId()){
+    public void onClick(View v) {
+        // Handle click events for different views
+        switch (v.getId()) {
             case R.id.goToSignUpActivity:
-                startActivity(new Intent(this,SignUpActivity.class));
+                // Start SignUpActivity when register TextView is clicked
+                startActivity(new Intent(this, SignUpActivity.class));
                 break;
             case R.id.login:
+                // Perform user login when login button is clicked
                 userLogin();
                 break;
             case R.id.resetPassword:
+                // Start ForgotPasswordActivity when resetPassword TextView is clicked
                 startActivity(new Intent(this, ForgotPasswordActivity.class));
                 break;
         }
     }
-    private void userLogin(){
+
+    private void userLogin() {
+        // Retrieve user input for email and password
         String email = editTextEmail.getText().toString().trim();
         String password = editTextPassword.getText().toString().trim();
-        if(email.isEmpty()){
+
+        // Validate user input
+        if (email.isEmpty()) {
             editTextEmail.setError("Email is required");
             editTextEmail.requestFocus();
             return;
         }
-        if(!Patterns.EMAIL_ADDRESS.matcher(email).matches()){
+        if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
             editTextEmail.setError("Please enter a valid email");
             editTextEmail.requestFocus();
             return;
         }
-        if(password.isEmpty()){
+        if (password.isEmpty()) {
             editTextPassword.setError("Password is required !");
             editTextPassword.requestFocus();
             return;
         }
-        if (password.length() < 8){
+        if (password.length() < 8) {
             editTextPassword.setError("Min password length is 8 characters !");
             editTextPassword.requestFocus();
             return;
         }
+
+        // Display progress bar while performing login
         progressBar.setVisibility(View.VISIBLE);
-        mAuth.signInWithEmailAndPassword(email,password).addOnCompleteListener(task -> {
-            if (task.isSuccessful()){
+
+        // Authenticate user with provided email and password
+        mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
                 FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
                 assert user != null;
-                if(user.isEmailVerified()) {
-                    //redirect to user profile
+                if (user.isEmailVerified()) {
+                    // Redirect to user profile if email is verified
                     startActivity(new Intent(LoginActivity.this, PrincipalePageActivity.class));
                     progressBar.setVisibility(View.INVISIBLE);
-                }else{
+                } else {
+                    // Send email verification and display a message
                     user.sendEmailVerification();
                     Toast.makeText(LoginActivity.this, "Check your email to verify your account!", Toast.LENGTH_LONG).show();
                     progressBar.setVisibility(View.INVISIBLE);
                 }
-            }else {
+            } else {
+                // Display an error message if login fails
                 Toast.makeText(LoginActivity.this, "Failed to login! Please check your credentials", Toast.LENGTH_LONG).show();
                 progressBar.setVisibility(View.INVISIBLE);
             }

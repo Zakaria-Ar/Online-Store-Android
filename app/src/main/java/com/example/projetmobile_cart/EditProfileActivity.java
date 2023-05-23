@@ -23,25 +23,31 @@ public class EditProfileActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_profile);
 
-
-        Button dismissChanges = (Button) findViewById(R.id.dismissChanges);
+        // Dismiss Changes Button
+        Button dismissChanges = findViewById(R.id.dismissChanges);
         dismissChanges.setOnClickListener(v -> {
+            // Start the ProfileActivity
             startActivity(new Intent(EditProfileActivity.this, ProfileActivity.class));
         });
+
+        // Get current user's ID
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         assert user != null;
         String userID = user.getUid();
 
-        final TextView firstNameTextView = (TextView) findViewById(R.id.firstNameResponse);
-        final TextView lastNameTextView = (TextView) findViewById(R.id.lastNameResponse);
-        final TextView emailTextView = (TextView) findViewById(R.id.emailAddressResponse);
-        final TextView mobileNumberTextView = (TextView) findViewById(R.id.mobileNumberResponse);
-        final TextView bioTextView = (TextView) findViewById(R.id.bioResponse);
+        // Get references to the TextViews for displaying user profile information
+        final TextView firstNameTextView = findViewById(R.id.firstNameResponse);
+        final TextView lastNameTextView = findViewById(R.id.lastNameResponse);
+        final TextView emailTextView = findViewById(R.id.emailAddressResponse);
+        final TextView mobileNumberTextView = findViewById(R.id.mobileNumberResponse);
+        final TextView bioTextView = findViewById(R.id.bioResponse);
+
+        // Retrieve user profile data from Firebase Realtime Database
         FirebaseDatabase.getInstance().getReference("Users").child(userID).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()) {
-                    // User document exists, get data
+                    // User document exists, retrieve data and set it to the TextViews
                     String firstName = dataSnapshot.child("First Name").getValue(String.class);
                     String lastName = dataSnapshot.child("Last Name").getValue(String.class);
                     String email = dataSnapshot.child("email").getValue(String.class);
@@ -57,47 +63,53 @@ public class EditProfileActivity extends AppCompatActivity {
             }
             @Override
             public void onCancelled(DatabaseError databaseError) {
-                Toast.makeText(EditProfileActivity.this, "Something Wrong happened !", Toast.LENGTH_LONG).show();
+                Toast.makeText(EditProfileActivity.this, "Something went wrong!", Toast.LENGTH_LONG).show();
             }
         });
+
+        // Save Changes Button
         Button saveButton = findViewById(R.id.saveChanges);
         saveButton.setOnClickListener(v -> {
+            // Get current user's ID
             FirebaseUser user1 = FirebaseAuth.getInstance().getCurrentUser();
             assert user1 != null;
             String userID1 = user1.getUid();
 
+            // Retrieve the entered user profile information
             String firstName = firstNameTextView.getText().toString();
             String lastName = lastNameTextView.getText().toString();
             String email = emailTextView.getText().toString();
             String mobileNumber = mobileNumberTextView.getText().toString();
             String bio = bioTextView.getText().toString();
 
-            if(firstName.isEmpty()){
-                firstNameTextView.setError("First Name is required !");
+            // Validate the entered information
+            if (firstName.isEmpty()) {
+                firstNameTextView.setError("First Name is required!");
                 firstNameTextView.requestFocus();
                 return;
             }
-            if(lastName.isEmpty()){
-                lastNameTextView.setError("Last Name is required !");
+            if (lastName.isEmpty()) {
+                lastNameTextView.setError("Last Name is required!");
                 lastNameTextView.requestFocus();
                 return;
             }
-            if(mobileNumber.length() != 10){
-                mobileNumberTextView.setError("Mobile Number is incorrect !");
+            if (mobileNumber.length() != 10) {
+                mobileNumberTextView.setError("Mobile Number is incorrect!");
                 mobileNumberTextView.requestFocus();
                 return;
             }
-
-            if(email.isEmpty()){
+            if (email.isEmpty()) {
                 emailTextView.setError("Email is required");
                 emailTextView.requestFocus();
                 return;
             }
-            if(!Patterns.EMAIL_ADDRESS.matcher(email).matches()){
+            if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
                 emailTextView.setError("Please enter a valid email");
                 emailTextView.requestFocus();
                 return;
             }
+
+            // Update user profile data in Firebase Realtime Database
             FirebaseDatabase.getInstance().getReference("Users").child(userID1)
                     .child("First Name").setValue(firstName);
             FirebaseDatabase.getInstance().getReference("Users").child(userID1)
@@ -111,6 +123,5 @@ public class EditProfileActivity extends AppCompatActivity {
 
             Toast.makeText(EditProfileActivity.this, "Profile updated successfully!", Toast.LENGTH_LONG).show();
         });
-
     }
 }

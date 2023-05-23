@@ -30,24 +30,28 @@ public class MyAdapter2 extends RecyclerView.Adapter<MyViewHolder2> {
     @NonNull
     @Override
     public MyViewHolder2 onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.recycler_item,parent,false);
+        // Inflates the layout for each item in the RecyclerView
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.recycler_item, parent, false);
         return new MyViewHolder2(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder2 holder, int position) {
+        // Binds data to the views within each ViewHolder
         Glide.with(context).load(dataList.get(position).getDataImage()).into(holder.recImage);
         holder.recTitle.setText(dataList.get(position).getDataTitle());
 
+        // Sets a click listener on the item's CardView
         holder.recCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(context,DetailActivity.class);
-                intent.putExtra("Image",dataList.get(holder.getAdapterPosition()).getDataImage());
-                intent.putExtra("Title",dataList.get(holder.getAdapterPosition()).getDataTitle());
-                intent.putExtra("Price",dataList.get(holder.getAdapterPosition()).getDataPrice());
-                intent.putExtra("Description",dataList.get(holder.getAdapterPosition()).getDataDesc());
-                intent.putExtra("Key",dataList.get(holder.getAdapterPosition()).getKey());
+                // Starts the DetailActivity and passes relevant data as extras
+                Intent intent = new Intent(context, DetailActivity.class);
+                intent.putExtra("Image", dataList.get(holder.getAdapterPosition()).getDataImage());
+                intent.putExtra("Title", dataList.get(holder.getAdapterPosition()).getDataTitle());
+                intent.putExtra("Price", dataList.get(holder.getAdapterPosition()).getDataPrice());
+                intent.putExtra("Description", dataList.get(holder.getAdapterPosition()).getDataDesc());
+                intent.putExtra("Key", dataList.get(holder.getAdapterPosition()).getKey());
 
                 context.startActivity(intent);
             }
@@ -59,15 +63,16 @@ public class MyAdapter2 extends RecyclerView.Adapter<MyViewHolder2> {
         return dataList.size();
     }
 
-    public void searchDataList(ArrayList<DataClass> searchList){
+    public void searchDataList(ArrayList<DataClass> searchList) {
+        // Updates the data list with a new list for searching/filtering
         dataList = searchList;
         notifyDataSetChanged();
     }
 }
-class MyViewHolder2 extends RecyclerView.ViewHolder{
 
+class MyViewHolder2 extends RecyclerView.ViewHolder {
     ImageView recImage;
-    TextView recTitle,recPrice,recDesc;
+    TextView recTitle, recPrice, recDesc;
     CardView recCard;
 
     public MyViewHolder2(@NonNull View itemView) {

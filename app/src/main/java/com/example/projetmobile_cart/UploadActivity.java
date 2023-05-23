@@ -33,42 +33,41 @@ import java.util.Calendar;
 public class UploadActivity extends AppCompatActivity {
 
     ImageView uploadImage;
-
     Button saveButton;
-
-    EditText uploadDesc,uploadPrice,uploadTopic;
-
+    EditText uploadDesc, uploadPrice, uploadTopic;
     String imageURL;
-
     Uri uri;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_upload);
 
+        // Initialize UI elements
         uploadImage = findViewById(R.id.uploadImage);
         uploadPrice = findViewById(R.id.uploadPrice);
         uploadTopic = findViewById(R.id.uploadTopic);
         uploadDesc = findViewById(R.id.uploadDesc);
         saveButton = findViewById(R.id.saveButton);
 
+        // Register an activity result launcher to handle image selection
         ActivityResultLauncher<Intent> activityResultLauncher = registerForActivityResult(
                 new ActivityResultContracts.StartActivityForResult(),
                 new ActivityResultCallback<ActivityResult>() {
                     @Override
                     public void onActivityResult(ActivityResult result) {
-                        if(result.getResultCode()== Activity.RESULT_OK){
+                        if (result.getResultCode() == Activity.RESULT_OK) {
                             Intent data = result.getData();
                             uri = data.getData();
                             uploadImage.setImageURI(uri);
-                        }else{
-                            Toast.makeText(UploadActivity.this,"No Image Selected",Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(UploadActivity.this, "No Image Selected", Toast.LENGTH_SHORT).show();
                         }
                     }
                 }
         );
+
+        // Set click listener for selecting an image
         uploadImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -77,6 +76,8 @@ public class UploadActivity extends AppCompatActivity {
                 activityResultLauncher.launch(photoPicker);
             }
         });
+
+        // Set click listener for the save button
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -84,25 +85,30 @@ public class UploadActivity extends AppCompatActivity {
             }
         });
     }
-    public void saveData(){
+
+    // Save the data (including the image) to Firebase
+    public void saveData() {
         if (uri == null) {
-            Toast.makeText(UploadActivity.this,"No Image Selected",Toast.LENGTH_SHORT).show();
+            Toast.makeText(UploadActivity.this, "No Image Selected", Toast.LENGTH_SHORT).show();
             uploadData();
             return;
         }
+
         StorageReference storageReference = FirebaseStorage.getInstance().getReference().child("Android images")
                 .child(uri.getLastPathSegment());
+
         AlertDialog.Builder builder = new AlertDialog.Builder(UploadActivity.this);
         builder.setCancelable(false);
         builder.setView(R.layout.progress_layout);
         AlertDialog dialog = builder.create();
         dialog.show();
 
+        // Upload the image to Firebase Storage
         storageReference.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
             @Override
             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                 Task<Uri> uriTask = taskSnapshot.getStorage().getDownloadUrl();
-                while (!uriTask.isComplete());
+                while (!uriTask.isComplete()) ;
                 Uri urlImage = uriTask.getResult();
                 imageURL = urlImage.toString();
                 uploadData();
@@ -115,12 +121,14 @@ public class UploadActivity extends AppCompatActivity {
             }
         });
     }
-    public void uploadData(){
+
+    // Upload the data (including the image URL) to the Firebase Realtime Database
+    public void uploadData() {
         String title = uploadTopic.getText().toString();
         String desc = uploadDesc.getText().toString();
         String price = uploadPrice.getText().toString();
 
-        DataClass dataClass = new DataClass(title,desc,price,imageURL);
+        DataClass dataClass = new DataClass(title, desc, price, imageURL);
 
         String currentDate = DateFormat.getDateTimeInstance().format(Calendar.getInstance().getTime());
 
@@ -128,7 +136,7 @@ public class UploadActivity extends AppCompatActivity {
                 .setValue(dataClass).addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
-                        if(task.isSuccessful()){
+                        if (task.isSuccessful()) {
                             Toast.makeText(UploadActivity.this, "Saved", Toast.LENGTH_SHORT).show();
                             finish();
                         }

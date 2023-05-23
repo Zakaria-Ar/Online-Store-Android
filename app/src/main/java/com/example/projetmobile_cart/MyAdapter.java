@@ -18,7 +18,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MyAdapter extends RecyclerView.Adapter<MyViewHolder> {
-
     private Context context;
     private List<DataClass> dataList;
 
@@ -30,24 +29,28 @@ public class MyAdapter extends RecyclerView.Adapter<MyViewHolder> {
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.recycler_item,parent,false);
+        // Inflates the layout for each item in the RecyclerView
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.recycler_item, parent, false);
         return new MyViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
+        // Binds data to the views within each ViewHolder
         Glide.with(context).load(dataList.get(position).getDataImage()).into(holder.recImage);
         holder.recTitle.setText(dataList.get(position).getDataTitle());
 
+        // Sets a click listener on the item's CardView
         holder.recCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(context,AddToCartActivity.class);
-                intent.putExtra("Image",dataList.get(holder.getAdapterPosition()).getDataImage());
-                intent.putExtra("Title",dataList.get(holder.getAdapterPosition()).getDataTitle());
-                intent.putExtra("Price",dataList.get(holder.getAdapterPosition()).getDataPrice());
-                intent.putExtra("Description",dataList.get(holder.getAdapterPosition()).getDataDesc());
-                intent.putExtra("Key",dataList.get(holder.getAdapterPosition()).getKey());
+                // Starts the AddToCartActivity and passes relevant data as extras
+                Intent intent = new Intent(context, AddToCartActivity.class);
+                intent.putExtra("Image", dataList.get(holder.getAdapterPosition()).getDataImage());
+                intent.putExtra("Title", dataList.get(holder.getAdapterPosition()).getDataTitle());
+                intent.putExtra("Price", dataList.get(holder.getAdapterPosition()).getDataPrice());
+                intent.putExtra("Description", dataList.get(holder.getAdapterPosition()).getDataDesc());
+                intent.putExtra("Key", dataList.get(holder.getAdapterPosition()).getKey());
 
                 context.startActivity(intent);
             }
@@ -59,15 +62,16 @@ public class MyAdapter extends RecyclerView.Adapter<MyViewHolder> {
         return dataList.size();
     }
 
-    public void searchDataList(ArrayList<DataClass> searchList){
+    public void searchDataList(ArrayList<DataClass> searchList) {
+        // Updates the data list with a new list for searching/filtering
         dataList = searchList;
         notifyDataSetChanged();
     }
 }
-class MyViewHolder extends RecyclerView.ViewHolder{
 
+class MyViewHolder extends RecyclerView.ViewHolder {
     ImageView recImage;
-    TextView recTitle,recPrice,recDesc;
+    TextView recTitle, recPrice, recDesc;
     CardView recCard;
 
     public MyViewHolder(@NonNull View itemView) {
@@ -76,7 +80,7 @@ class MyViewHolder extends RecyclerView.ViewHolder{
         recImage = itemView.findViewById(R.id.recImage);
         recTitle = itemView.findViewById(R.id.recTitle);
         recCard = itemView.findViewById(R.id.recCard);
-        recPrice = itemView.findViewById(R.id.productPrice); //problem here
+        recPrice = itemView.findViewById(R.id.productPrice);
         recDesc = itemView.findViewById(R.id.detailDesc);
     }
 }

@@ -33,10 +33,12 @@ public class PrincipalePageActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_principale_page);
 
+        // Initialize RecyclerView and set its layout manager
         recyclerView = findViewById(R.id.recyclerView);
         GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 2);
         recyclerView.setLayoutManager(gridLayoutManager);
 
+        // Initialize the list and adapter for the RecyclerView
         dataList = new ArrayList<>();
         adapter = new MyAdapter(this, dataList);
         recyclerView.setAdapter(adapter);
@@ -46,25 +48,34 @@ public class PrincipalePageActivity extends AppCompatActivity {
                 .addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
+                        // Clear the current data list
                         dataList.clear();
+
+                        // Iterate through the product snapshots and convert them to DataClass objects
                         for (DataSnapshot itemSnapshot : dataSnapshot.getChildren()) {
                             DataClass dataClass = itemSnapshot.getValue(DataClass.class);
                             if (dataClass != null) {
+                                // Set the key for each DataClass object
                                 dataClass.setKey(itemSnapshot.getKey());
+                                // Add the DataClass object to the data list
                                 dataList.add(dataClass);
                             }
                         }
+
+                        // Notify the adapter that the data has changed
                         adapter.notifyDataSetChanged();
                     }
 
                     @Override
                     public void onCancelled(DatabaseError databaseError) {
+                        // Display an error message if fetching products fails
                         Toast.makeText(PrincipalePageActivity.this,
                                 "Failed to fetch products: " + databaseError.getMessage(),
                                 Toast.LENGTH_SHORT).show();
                     }
                 });
 
+        // Set click listeners for various menu items
         View account = findViewById(R.id.menuAccount);
         account.setOnClickListener(v -> startActivity(new Intent(PrincipalePageActivity.this, ProfileActivity.class)));
 
@@ -74,6 +85,7 @@ public class PrincipalePageActivity extends AppCompatActivity {
         account = findViewById(R.id.menuCreateStore);
         account.setOnClickListener(v -> startActivity(new Intent(PrincipalePageActivity.this, FavoriteActivity.class)));
 
+        // Fetch and display the user's name from Firebase Realtime Database
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         assert user != null;
         String userID = user.getUid();
@@ -84,7 +96,7 @@ public class PrincipalePageActivity extends AppCompatActivity {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         if (dataSnapshot.exists()) {
-                            // User document exists, get data
+                            // User document exists, get the last name and set it as the user name
                             String name = dataSnapshot.child("Last Name").getValue(String.class);
                             userName.setText(name);
                         }
@@ -92,6 +104,7 @@ public class PrincipalePageActivity extends AppCompatActivity {
 
                     @Override
                     public void onCancelled(DatabaseError databaseError) {
+                        // Display an error message if fetching user data fails
                         Toast.makeText(PrincipalePageActivity.this,
                                 "Failed to fetch user data: " + databaseError.getMessage(),
                                 Toast.LENGTH_SHORT).show();

@@ -22,6 +22,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ImportActivity extends AppCompatActivity {
+
     FloatingActionButton fab;
     RecyclerView recyclerView;
     List<DataClass> dataList;
@@ -35,34 +36,37 @@ public class ImportActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_import);
 
-
+        // Initialize UI elements
         fab = findViewById(R.id.fab);
         recyclerView = findViewById(R.id.recyclerView);
         searchView = findViewById(R.id.search);
         searchView.clearFocus();
 
-        GridLayoutManager gridLayoutManager = new GridLayoutManager(ImportActivity.this,1);
+        // Set up RecyclerView with GridLayoutManager
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(ImportActivity.this, 1);
         recyclerView.setLayoutManager(gridLayoutManager);
 
+        // Set up AlertDialog for progress indication
         AlertDialog.Builder builder = new AlertDialog.Builder(ImportActivity.this);
         builder.setCancelable(false);
         builder.setView(R.layout.progress_layout);
         AlertDialog dialog = builder.create();
-        dialog.show();
 
+        // Initialize data list and adapter
         dataList = new ArrayList<>();
-
-        adapter = new MyAdapter2(ImportActivity.this,dataList);
+        adapter = new MyAdapter2(ImportActivity.this, dataList);
         recyclerView.setAdapter(adapter);
 
+        // Get reference to "Products" node in Firebase Realtime Database
         databaseReference = FirebaseDatabase.getInstance().getReference("Products");
         dialog.show();
 
+        // Retrieve data from Firebase Realtime Database
         eventListener = databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 dataList.clear();
-                for (DataSnapshot itemSnapshot: snapshot.getChildren()){
+                for (DataSnapshot itemSnapshot : snapshot.getChildren()) {
                     DataClass dataClass = itemSnapshot.getValue(DataClass.class);
                     dataClass.setKey(itemSnapshot.getKey());
                     dataList.add(dataClass);
@@ -77,6 +81,7 @@ public class ImportActivity extends AppCompatActivity {
             }
         });
 
+        // Set up search functionality
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
@@ -90,6 +95,7 @@ public class ImportActivity extends AppCompatActivity {
             }
         });
 
+        // Set up click listener for the floating action button (fab)
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -108,5 +114,4 @@ public class ImportActivity extends AppCompatActivity {
         }
         adapter.searchDataList(searchList);
     }
-
 }

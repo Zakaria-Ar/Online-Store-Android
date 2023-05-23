@@ -42,6 +42,8 @@ public class ShoppingBasketActivity extends AppCompatActivity {
         // Initialize basketAdapter
         basketAdapter = new BasketAdapter(basketList);
         recyclerView.setAdapter(basketAdapter);
+
+        // Calculate and display the total price of items in the basket
         calculateTotalPrice();
     }
 
@@ -59,6 +61,7 @@ public class ShoppingBasketActivity extends AppCompatActivity {
         if (user != null) {
             String userId = user.getUid();
 
+            // Get the reference to the user's basket items in the Firebase Realtime Database
             DatabaseReference userBasketRef = FirebaseDatabase.getInstance().getReference("Basket")
                     .child(userId);
 
@@ -67,6 +70,7 @@ public class ShoppingBasketActivity extends AppCompatActivity {
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                     basketList.clear();
 
+                    // Iterate over the basket items and add them to the basketList
                     for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                         Basket basket = snapshot.getValue(Basket.class);
                         basketList.add(basket);
@@ -96,9 +100,11 @@ public class ShoppingBasketActivity extends AppCompatActivity {
                 public void onDataChange(DataSnapshot dataSnapshot) {
                     int totalPrice = 0;
 
+                    // Iterate over the basket items and calculate the total price
                     for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                         Basket basket = snapshot.getValue(Basket.class);
                         if (basket != null) {
+                            // Extract the price from the data and convert it to an integer
                             String priceString = basket.getDataPrice().replaceAll("[^\\d.]", ""); // Remove non-digit characters
                             int price = 0;
 
@@ -112,6 +118,7 @@ public class ShoppingBasketActivity extends AppCompatActivity {
                         }
                     }
 
+                    // Display the total price in the appropriate TextView
                     TextView prixTotalTextView = findViewById(R.id.prix_total);
                     prixTotalTextView.setText(String.valueOf(totalPrice) + " DH");
                 }
@@ -123,5 +130,5 @@ public class ShoppingBasketActivity extends AppCompatActivity {
             });
         }
     }
-
 }
+

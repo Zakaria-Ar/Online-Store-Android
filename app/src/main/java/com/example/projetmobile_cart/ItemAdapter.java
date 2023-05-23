@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
 public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder> {
+
     private List<Item> itemList;
 
     public ItemAdapter(List<Item> itemList) {
@@ -21,12 +22,14 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
     @NonNull
     @Override
     public ItemViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        // Inflates the item layout and creates a new ViewHolder instance
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_favorite, parent, false);
         return new ItemViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ItemViewHolder holder, int position) {
+        // Binds the data to the views within the ViewHolder
         Item currentItem = itemList.get(position);
 
         holder.imageView.setImageResource(currentItem.getImageResource());
@@ -38,6 +41,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
 
     @Override
     public int getItemCount() {
+        // Returns the number of items in the data list
         return itemList.size();
     }
 
@@ -50,11 +54,12 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
 
         public ItemViewHolder(@NonNull View itemView) {
             super(itemView);
+            // Initializes the views within the ViewHolder
             imageView = itemView.findViewById(R.id.favoriteImage);
             nameTextView = itemView.findViewById(R.id.favoriteTitle);
             descriptionTextView = itemView.findViewById(R.id.favoriteDesc);
-            priceTextView =itemView.findViewById(R.id.favoritePrice);
-            quaTextview=itemView.findViewById(R.id.favoriteDesc);
+            priceTextView = itemView.findViewById(R.id.favoritePrice);
+            quaTextview = itemView.findViewById(R.id.favoriteDesc);
         }
     }
 }

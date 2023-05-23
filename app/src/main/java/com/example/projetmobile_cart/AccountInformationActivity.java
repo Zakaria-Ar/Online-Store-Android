@@ -22,20 +22,28 @@ public class AccountInformationActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_account_information);
 
+        // Logout button setup
         Button logout = (Button) findViewById(R.id.signout);
         logout.setOnClickListener(v -> {
+            // Sign out the user
             FirebaseAuth.getInstance().signOut();
+
+            // Redirect to the login screen
             startActivity(new Intent(AccountInformationActivity.this, LoginActivity.class));
         });
 
+        // Get the current user
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         assert user != null;
         String userID = user.getUid();
 
+        // TextViews for displaying user information
         final TextView firstNameTextView = (TextView) findViewById(R.id.firstName);
         final TextView lastNameTextView = (TextView) findViewById(R.id.lastName);
         final TextView emailTextView = (TextView) findViewById(R.id.emailAddress);
         final TextView mobileNumberTextView = (TextView) findViewById(R.id.mobileNumber);
+
+        // Retrieve user information from the Firebase Realtime Database
         FirebaseDatabase.getInstance().getReference("Users").child(userID).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -46,15 +54,18 @@ public class AccountInformationActivity extends AppCompatActivity {
                     String email = dataSnapshot.child("email").getValue(String.class);
                     String mobileNumber = dataSnapshot.child("Mobile Number").getValue(String.class);
 
+                    // Display user information in the TextViews
                     firstNameTextView.setText(firstName);
                     lastNameTextView.setText(lastName);
                     emailTextView.setText(email);
                     mobileNumberTextView.setText(mobileNumber);
                 }
             }
+
             @Override
             public void onCancelled(DatabaseError databaseError) {
-                Toast.makeText(AccountInformationActivity.this, "Something Wrong happened !", Toast.LENGTH_LONG).show();
+                // Display an error message if data retrieval is unsuccessful
+                Toast.makeText(AccountInformationActivity.this, "Something went wrong!", Toast.LENGTH_LONG).show();
             }
         });
     }

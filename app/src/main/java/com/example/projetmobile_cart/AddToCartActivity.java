@@ -21,31 +21,36 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 public class AddToCartActivity extends AppCompatActivity {
-    TextView detailDesc, detailTitle,detailLang;
+    TextView detailDesc, detailTitle, detailLang;
     ImageView detailImage;
     String key = "";
     String imageUrl = "";
     private DatabaseReference databaseReference;
     private FirebaseAuth firebaseAuth;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_to_cart);
+
+        // Initialize views
         detailDesc = findViewById(R.id.detailDesc);
         detailTitle = findViewById(R.id.detailTitle);
         detailImage = findViewById(R.id.productImage);
         detailLang = findViewById(R.id.productPrice);
 
+        // Retrieve data from intent extras
         Bundle bundle = getIntent().getExtras();
         if (bundle != null) {
             detailDesc.setText(bundle.getString("Description"));
             detailTitle.setText(bundle.getString("Title"));
-            detailLang.setText(bundle.getString("Price")+ " DH");
+            detailLang.setText(bundle.getString("Price") + " DH");
             key = bundle.getString("Key");
             imageUrl = bundle.getString("Image");
             Glide.with(this).load(bundle.getString("Image")).into(detailImage);
         }
 
+        // Favorites icon click listener
         ImageView imageViewFavorites = findViewById(R.id.imageView2);
         imageViewFavorites.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -53,14 +58,17 @@ public class AddToCartActivity extends AppCompatActivity {
                 addToFavorites();
             }
         });
+
+        // Go back button click listener
         ImageView goBackImageView = findViewById(R.id.goBack);
         goBackImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Handle the click event here
                 onBackPressed(); // Go back to the previous activity
             }
         });
+
+        // Add to cart button click listener
         Button addToCartButton = findViewById(R.id.addToCartBtn);
         addToCartButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -69,13 +77,14 @@ public class AddToCartActivity extends AppCompatActivity {
             }
         });
     }
+
+    // Function to add the product to favorites
     private void addToFavorites() {
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         DatabaseReference favoritesRef = FirebaseDatabase.getInstance().getReference("favorites");
 
         if (user != null) {
             String userId = user.getUid();
-
             DatabaseReference userFavoritesRef = favoritesRef.child(userId);
 
             // Check if the product already exists in favorites
@@ -86,8 +95,10 @@ public class AddToCartActivity extends AppCompatActivity {
                     if (dataSnapshot.exists()) {
                         Toast.makeText(AddToCartActivity.this, "Product already added to favorites", Toast.LENGTH_SHORT).show();
                     } else {
+                        // Generate a unique favoriteId for the new favorite
                         String favoriteId = userFavoritesRef.push().getKey();
 
+                        // Create a Favorite object with the product details
                         Favorite favorite = new Favorite();
                         favorite.setDataDesc(detailDesc.getText().toString());
                         favorite.setDataImage(imageUrl);
@@ -100,6 +111,7 @@ public class AddToCartActivity extends AppCompatActivity {
                             favorite.setDataPrice(""); // Set an empty string if no price is available
                         }
 
+                        // Add the favorite to the user's favorites list
                         userFavoritesRef.child(favoriteId).setValue(favorite)
                                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                                     @Override
@@ -118,16 +130,16 @@ public class AddToCartActivity extends AppCompatActivity {
         }
     }
 
+    // Function to add the product to the cart
     private void addToCart() {
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         DatabaseReference favoritesRef = FirebaseDatabase.getInstance().getReference("Basket");
 
         if (user != null) {
             String userId = user.getUid();
-
             DatabaseReference userFavoritesRef = favoritesRef.child(userId);
 
-            // Check if the product already exists in favorites
+            // Check if the product already exists in the cart
             Query query = userFavoritesRef.orderByChild("dataTitle").equalTo(detailTitle.getText().toString());
             query.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
@@ -135,8 +147,10 @@ public class AddToCartActivity extends AppCompatActivity {
                     if (dataSnapshot.exists()) {
                         Toast.makeText(AddToCartActivity.this, "Product already added to Basket", Toast.LENGTH_SHORT).show();
                     } else {
+                        // Generate a unique favoriteId for the new cart item
                         String favoriteId = userFavoritesRef.push().getKey();
 
+                        // Create a Basket object with the product details
                         Basket basket = new Basket();
                         basket.setDataDesc(detailDesc.getText().toString());
                         basket.setDataImage(imageUrl);
@@ -149,6 +163,7 @@ public class AddToCartActivity extends AppCompatActivity {
                             basket.setDataPrice("No price available"); // Set a default message when no price is available
                         }
 
+                        // Add the cart item to the user's cart
                         userFavoritesRef.child(favoriteId).setValue(basket)
                                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                                     @Override
@@ -166,5 +181,4 @@ public class AddToCartActivity extends AppCompatActivity {
             });
         }
     }
-
 }

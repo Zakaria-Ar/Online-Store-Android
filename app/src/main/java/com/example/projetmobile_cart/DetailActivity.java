@@ -18,10 +18,9 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
 public class DetailActivity extends AppCompatActivity {
-
-    TextView detailDesc, detailTitle,detailPrice;
+    TextView detailDesc, detailTitle, detailPrice;
     ImageView detailImage;
-    FloatingActionButton deleteButton,editButton;
+    FloatingActionButton deleteButton, editButton;
     String key = "";
     String imageUrl = "";
 
@@ -30,6 +29,7 @@ public class DetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
 
+        // Initialize the views
         detailDesc = findViewById(R.id.detailDesc);
         detailTitle = findViewById(R.id.detailTitle);
         detailImage = findViewById(R.id.detailImage);
@@ -38,7 +38,8 @@ public class DetailActivity extends AppCompatActivity {
         editButton = findViewById(R.id.editButton);
 
         Bundle bundle = getIntent().getExtras();
-        if (bundle !=null){
+        if (bundle != null) {
+            // Retrieve the data from the bundle and set it to the corresponding views
             detailDesc.setText(bundle.getString("Description"));
             detailTitle.setText(bundle.getString("Title"));
             detailPrice.setText(bundle.getString("Price") + " DH");
@@ -46,6 +47,8 @@ public class DetailActivity extends AppCompatActivity {
             imageUrl = bundle.getString("Image");
             Glide.with(this).load(bundle.getString("Image")).into(detailImage);
         }
+
+        // Set a click listener for the delete button
         deleteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -55,6 +58,7 @@ public class DetailActivity extends AppCompatActivity {
                 storageReference.delete().addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void unused) {
+                        // Delete the corresponding product from the database
                         reference.child(key).removeValue();
                         Toast.makeText(DetailActivity.this, "Deleted", Toast.LENGTH_SHORT).show();
                         startActivity(new Intent(getApplicationContext(), ImportActivity.class));
@@ -63,15 +67,18 @@ public class DetailActivity extends AppCompatActivity {
                 });
             }
         });
+
+        // Set a click listener for the edit button
         editButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                // Start the UpdateActivity and pass the necessary data to update the product
                 Intent intent = new Intent(DetailActivity.this, UpdateActivity.class)
-                        .putExtra("Title",detailTitle.getText().toString())
-                        .putExtra("Description",detailDesc.getText().toString())
-                        .putExtra("Price",detailPrice.getText().toString())
-                        .putExtra("Image",imageUrl)
-                        .putExtra("Key",key);
+                        .putExtra("Title", detailTitle.getText().toString())
+                        .putExtra("Description", detailDesc.getText().toString())
+                        .putExtra("Price", detailPrice.getText().toString())
+                        .putExtra("Image", imageUrl)
+                        .putExtra("Key", key);
                 startActivity(intent);
             }
         });

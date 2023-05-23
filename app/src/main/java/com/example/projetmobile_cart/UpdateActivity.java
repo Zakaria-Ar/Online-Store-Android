@@ -46,13 +46,14 @@ public class UpdateActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_update);
 
+        // Initialize UI elements
         updateButton = findViewById(R.id.updateButton);
         updatePrice = findViewById(R.id.updatePrice);
         updateDesc = findViewById(R.id.updateDesc);
         updateTitle = findViewById(R.id.updateTopic);
         updateImage = findViewById(R.id.updateImage);
 
-        //Select a new image
+        // Register an activity result launcher to handle image selection
         ActivityResultLauncher<Intent> activityResultLauncher = registerForActivityResult(
                 new ActivityResultContracts.StartActivityForResult(),
                 new ActivityResultCallback<ActivityResult>() {
@@ -69,6 +70,7 @@ public class UpdateActivity extends AppCompatActivity {
                 }
         );
 
+        // Retrieve data passed from the previous activity
         Bundle bundle = getIntent().getExtras();
         if (bundle != null) {
             Glide.with(UpdateActivity.this).load(bundle.getString("Image")).into(updateImage);
@@ -78,7 +80,8 @@ public class UpdateActivity extends AppCompatActivity {
             key = bundle.getString("Key");
             oldImageURL = bundle.getString("Image");
         }
-        databaseReference = FirebaseDatabase.getInstance().getReference("Products").child(key);
+
+        // Set click listener for updating the image
         updateImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -87,6 +90,8 @@ public class UpdateActivity extends AppCompatActivity {
                 activityResultLauncher.launch(photoPicker);
             }
         });
+
+        // Set click listener for the update button
         updateButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -95,9 +100,9 @@ public class UpdateActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
     }
 
+    // Save the data (including image) to Firebase
     public void saveData() {
         if (uri == null) {
             // If uri is null, update the data with the old image URL
@@ -112,6 +117,7 @@ public class UpdateActivity extends AppCompatActivity {
             AlertDialog dialog = builder.create();
             dialog.show();
 
+            // Upload the new image to Firebase Storage
             storageReference.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                 @Override
                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
@@ -125,35 +131,37 @@ public class UpdateActivity extends AppCompatActivity {
             }).addOnFailureListener(new OnFailureListener() {
                 @Override
                 public void onFailure(@NonNull Exception e) {
-
                     dialog.dismiss();
                 }
             });
         }
     }
+
+    // Update the data in the Firebase Realtime Database
     public void updateData() {
         title = updateTitle.getText().toString().trim();
         desc = updateDesc.getText().toString().trim();
         price = updatePrice.getText().toString();
 
-
-            DataClass dataClass = new DataClass(title, desc, price, imageUrl);
-            databaseReference.setValue(dataClass).addOnCompleteListener(new OnCompleteListener<Void>() {
-                @Override
-                public void onComplete(@NonNull Task<Void> task) {
-                    if (task.isSuccessful()) {
-                        if (imageUrl != oldImageURL){
-                            StorageReference reference = FirebaseStorage.getInstance().getReferenceFromUrl(oldImageURL);
-                            reference.delete();}
-                        Toast.makeText(UpdateActivity.this, "Updated", Toast.LENGTH_SHORT).show();
-                        finish();
+        DataClass dataClass = new DataClass(title, desc, price, imageUrl);
+        databaseReference.setValue(dataClass).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                if (task.isSuccessful()) {
+                    if (!imageUrl.equals(oldImageURL)) {
+                        // Delete the old image from Firebase Storage
+                        StorageReference reference = FirebaseStorage.getInstance().getReferenceFromUrl(oldImageURL);
+                        reference.delete();
                     }
+                    Toast.makeText(UpdateActivity.this, "Updated", Toast.LENGTH_SHORT).show();
+                    finish();
                 }
-            }).addOnFailureListener(new OnFailureListener() {
-                @Override
-                public void onFailure(@NonNull Exception e) {
-                    Toast.makeText(UpdateActivity.this, e.getMessage().toString(), Toast.LENGTH_SHORT).show();
-                }
-            });
-        }
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText(UpdateActivity.this, e.getMessage().toString(), Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
 }
