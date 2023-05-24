@@ -27,11 +27,16 @@ public class AddToCartActivity extends AppCompatActivity {
     String imageUrl = "";
     private DatabaseReference databaseReference;
     private FirebaseAuth firebaseAuth;
+    private ImageView imageViewFavorites;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_to_cart);
+
+        // Retrieve the favorites icon reference
+        imageViewFavorites = findViewById(R.id.imageView2);
 
         // Initialize views
         detailDesc = findViewById(R.id.detailDesc);
@@ -50,12 +55,14 @@ public class AddToCartActivity extends AppCompatActivity {
             Glide.with(this).load(bundle.getString("Image")).into(detailImage);
         }
 
+        // Check if the product already exists in favorites
+        checkFavoriteStatus();
+
         // Favorites icon click listener
-        ImageView imageViewFavorites = findViewById(R.id.imageView2);
         imageViewFavorites.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                addToFavorites();
+                toggleFavoriteStatus();
             }
         });
 
@@ -78,8 +85,7 @@ public class AddToCartActivity extends AppCompatActivity {
         });
     }
 
-    // Function to add the product to favorites
-    private void addToFavorites() {
+    private void checkFavoriteStatus() {
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         DatabaseReference favoritesRef = FirebaseDatabase.getInstance().getReference("favorites");
 
@@ -87,14 +93,49 @@ public class AddToCartActivity extends AppCompatActivity {
             String userId = user.getUid();
             DatabaseReference userFavoritesRef = favoritesRef.child(userId);
 
-            // Check if the product already exists in favorites
             Query query = userFavoritesRef.orderByChild("dataTitle").equalTo(detailTitle.getText().toString());
             query.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
                     if (dataSnapshot.exists()) {
-                        Toast.makeText(AddToCartActivity.this, "Product already added to favorites", Toast.LENGTH_SHORT).show();
+                        // Product already exists in favorites, so set the selected color
+                        imageViewFavorites.setImageResource(R.drawable.img_2);
                     } else {
+                        // Product doesn't exist in favorites, so set the unselected color
+                        imageViewFavorites.setImageResource(R.drawable.img_1);
+                    }
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+                    // Handle database error if necessary
+                }
+            });
+        }
+    }
+
+    private void toggleFavoriteStatus() {
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        DatabaseReference favoritesRef = FirebaseDatabase.getInstance().getReference("favorites");
+
+        if (user != null) {
+            String userId = user.getUid();
+            DatabaseReference userFavoritesRef = favoritesRef.child(userId);
+
+            Query query = userFavoritesRef.orderByChild("dataTitle").equalTo(detailTitle.getText().toString());
+            query.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    if (dataSnapshot.exists()) {
+                        // Product already exists in favorites, so remove it
+                        for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                            snapshot.getRef().removeValue();
+                        }
+                        Toast.makeText(AddToCartActivity.this, "Removed from favorites", Toast.LENGTH_SHORT).show();
+                        // Change the color of the favorites icon to indicate it's not selected
+                        imageViewFavorites.setImageResource(R.drawable.img_1);
+                    } else {
+                        // Product doesn't exist in favorites, so add it
                         // Generate a unique favoriteId for the new favorite
                         String favoriteId = userFavoritesRef.push().getKey();
 
@@ -117,6 +158,8 @@ public class AddToCartActivity extends AppCompatActivity {
                                     @Override
                                     public void onSuccess(Void aVoid) {
                                         Toast.makeText(AddToCartActivity.this, "Added to favorites", Toast.LENGTH_SHORT).show();
+                                        // Change the color of the favorites icon to indicate it's selected
+                                        imageViewFavorites.setImageResource(R.drawable.img_2);
                                     }
                                 });
                     }

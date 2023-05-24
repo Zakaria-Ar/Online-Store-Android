@@ -1,5 +1,5 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <string name="app_name">ProjetMobile_Cart</string>
+    <string name="app_name">onlineStore</string>
     <string name="cart">Cart</string>
     <string name="order" font-family="Imprima"><b>My Orders</b></string>
     <string name="produit"><b>Produit 1</b></string>
